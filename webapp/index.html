@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="PratoDoDiaApp">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		<link rel="icon" href="data:;base64,iVBORw0KGgo="/>
+
+		<title>Storms WebApp</title>
+
+		<script>document.write('<base href="' + window.location.toString().replace('/#!', '') + '" />');</script>
+
+		<link href="./css/style.css?v=c226b58d" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body ng-controller="AppController as App">
+
+		<h2>{{ self.batata }}</h2>
+
+		<header class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<ui-view name="toolbar"></ui-view>
+				</div>
+			</div>
+		</header>
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-xs-4">
+					<ui-view name="navigation"></ui-view>
+				</div>
+
+				<div class="col-xs-8">
+					<ui-view></ui-view>
+				</div>
+			</div>
+
+		</div>
+
+		<footer class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<ui-view name="footer"></ui-view>
+				</div>
+			</div>
+		</footer>
+
+		<script src="./js/scripts.js?v=e05f0022" type="text/javascript"></script>
+	</body>
+</html>
