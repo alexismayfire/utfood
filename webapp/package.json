@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vinigarcia87/Plakitca.git"
+    "url": "https://github.com/alexismayfire/utfood.git"
   },
   "dependencies": {
     "angular": "^1.7.4",
