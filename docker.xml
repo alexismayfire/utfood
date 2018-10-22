@@ -1,0 +1,5 @@
+<application>
+  <component name="DockerSettings">
+    <option name="dockerMachinePath" value="$USER_HOME$/Projetos/Calvintech/Energie/wp-site/docker-compose.yml" />
+  </component>
+</application>
