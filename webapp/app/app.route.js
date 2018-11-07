@@ -4,11 +4,17 @@
     angular
     .module('PratoDoDiaApp')
     .config([
-        	'$stateProvider', '$urlRouterProvider', 'appSettings',
-        	function($stateProvider, $urlRouterProvider, appSettings)
+        	'$stateProvider', '$urlRouterProvider', '$locationProvider', 'appSettings',
+        	function($stateProvider, $urlRouterProvider, $locationProvider, appSettings)
             {
 
         		$urlRouterProvider.when('', '/');
+                /*
+        		$urlRouterProvider.when('/estabelecimentos', {
+        		    templateUrl: appSettings.appUrl + '/app/estabelecimentos/estabelecimentos.html',
+                    controller: 'EstabelecimentosController'
+                });
+                */
                 $urlRouterProvider.otherwise('/');
 
 				// @see https://stackoverflow.com/a/27605371/1003020
@@ -29,7 +35,7 @@
 							templateUrl : appSettings.appUrl + '/app/content/content.html',
 							controller  : 'ContentController',
 							controllerAs: 'Content'
-						},
+						},   
 						footer: {
 							templateUrl : appSettings.appUrl + '/app/footer/footer.html',
 							controller  : 'FooterController',
@@ -42,8 +48,15 @@
 					templateUrl : appSettings.appUrl + '/app/home/home.html',
 					controller  : 'HomeController',
 					controllerAs: 'Home'
-				});
+				})
+				.state('app.estabelecimentos', {
+				    url: '/estabelecimentos',
+                    templateUrl: appSettings.appUrl + '/app/estabelecimentos/estabelecimentos.html',
+                    controller: 'EstabelecimentosController',
+                    controllerAs: 'Estabelecimentos'
+                });
 
+				$locationProvider.html5Mode(true);
             }
     	]);
 

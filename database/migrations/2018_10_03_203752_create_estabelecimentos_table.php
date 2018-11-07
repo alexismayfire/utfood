@@ -11,20 +11,21 @@ class CreateEstabelecimentosTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('estabelecimentos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->integer('owner');
+            $table->string('nome');
+            $table->integer('dono');
+            $table->string('endereco');
+            $table->string('telefone');
             $table->timestamps();
 
-            $table->foreign('owner')
+            $table->foreign('dono')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->unique('slug', 'unique_slug');
         });
     }
 

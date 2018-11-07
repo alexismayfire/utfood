@@ -8,7 +8,7 @@
             {
                 var self  = this;
 
-                self.batata = "OIE SEU BOSTA";
+                self.batatas = "OIE SEU BOSTA";
             }
         ]);
 
