@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateCardapio extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,18 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('cardapios', function(Blueprint $table) {
             $table->increments('id');
+            $table->integer('estabelecimento');
             $table->string('nome');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('senha');
-            $table->string('telefone');
-            $table->rememberToken();
+            $table->integer('pontos');
+            $table->boolean('status');
             $table->timestamps();
 
-            $table->unique('email', 'unique_email');
+            $table->foreign('estabelecimento')
+                ->references('id')
+                ->on('estabelecimentos')
+                ->onDelete('cascade');
         });
     }
 
@@ -34,6 +35,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        //
     }
 }

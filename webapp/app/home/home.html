@@ -1,1 +1,12 @@
-<p>{{ Home.msg }}</p>
+<div>
+    <ul>
+        <li ng-repeat="user in Home.users" ng-click="Home.showDetails(user)">
+            {{ user.name }}
+        </li>
+    </ul>
+    <div class="user-details">
+        <a href="/estabelecimentos">{{ Home.selectedUser.name }}</a>
+        <p>{{ Home.selectedUser.city }}</p>
+        <p>{{ Home.selectedUser.id }}</p>
+    </div>
+</div>

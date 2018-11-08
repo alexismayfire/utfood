@@ -7860,11 +7860,17 @@ angular.module('ui.bootstrap.typeahead').run(function() {!angular.$$csp().noInli
     angular
     .module('PratoDoDiaApp')
     .config([
-        	'$stateProvider', '$urlRouterProvider', 'appSettings',
-        	function($stateProvider, $urlRouterProvider, appSettings)
+        	'$stateProvider', '$urlRouterProvider', '$locationProvider', 'appSettings',
+        	function($stateProvider, $urlRouterProvider, $locationProvider, appSettings)
             {
 
         		$urlRouterProvider.when('', '/');
+                /*
+        		$urlRouterProvider.when('/estabelecimentos', {
+        		    templateUrl: appSettings.appUrl + '/app/estabelecimentos/estabelecimentos.html',
+                    controller: 'EstabelecimentosController'
+                });
+                */
                 $urlRouterProvider.otherwise('/');
 
 				// @see https://stackoverflow.com/a/27605371/1003020
@@ -7885,7 +7891,7 @@ angular.module('ui.bootstrap.typeahead').run(function() {!angular.$$csp().noInli
 							templateUrl : appSettings.appUrl + '/app/content/content.html',
 							controller  : 'ContentController',
 							controllerAs: 'Content'
-						},
+						},   
 						footer: {
 							templateUrl : appSettings.appUrl + '/app/footer/footer.html',
 							controller  : 'FooterController',
@@ -7898,8 +7904,15 @@ angular.module('ui.bootstrap.typeahead').run(function() {!angular.$$csp().noInli
 					templateUrl : appSettings.appUrl + '/app/home/home.html',
 					controller  : 'HomeController',
 					controllerAs: 'Home'
-				});
+				})
+				.state('app.estabelecimentos', {
+				    url: '/estabelecimentos',
+                    templateUrl: appSettings.appUrl + '/app/estabelecimentos/estabelecimentos.html',
+                    controller: 'EstabelecimentosController',
+                    controllerAs: 'Estabelecimentos'
+                });
 
+				$locationProvider.html5Mode(true);
             }
     	]);
 
@@ -7915,7 +7928,7 @@ angular.module('ui.bootstrap.typeahead').run(function() {!angular.$$csp().noInli
             {
                 var self  = this;
 
-                self.batata = "OIE SEU BOSTA";
+                self.batatas = "OIE SEU BOSTA";
             }
         ]);
 
@@ -7933,9 +7946,7 @@ angular.module('ui.bootstrap.typeahead').run(function() {!angular.$$csp().noInli
 
 
 
-                self.batata = function() {
-                    console.log("");
-                }
+                self.batata = function() {}
                 this.msg = 'Copyright (c) Storms Websolutions';
 
             }
@@ -7988,13 +7999,27 @@ angular.module('ui.bootstrap.typeahead').run(function() {!angular.$$csp().noInli
 (function () {
     'use strict';
 
-	angular
-	.module('PratoDoDiaApp')
-	.controller('HomeController', [
-        	function()
-            {
-                this.msg = 'Batata';
-            }
-        ]);
+	angular.module('PratoDoDiaApp')
+        .controller('HomeController', function HomeController($scope, $http) {
 
+            var self = this;
+            /*
+            $http.get('http://localhost:8000/users').then(function(response) {
+                console.log("foi");
+                $scope.users = JSON.stringify(response.data.data);
+            });
+            */
+            self.users = [
+                {
+                    name: 'Carlos', city: 'Curitiba', id: 1
+                }, {
+                    name: 'Thiago', city: 'Curitiba', id: 2
+                }
+            ];
+            self.estabelecimento = "";
+
+            self.showDetails = function(user) {
+                self.selectedUser = user;
+            }
+        });
 })();

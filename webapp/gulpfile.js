@@ -123,6 +123,7 @@ gulp.task('scripts', function() {
 		paths.angular_dir + '/toolbar/toolbar.controller.js',
 		paths.angular_dir + '/content/content.controller.js',
 		paths.angular_dir + '/navigation/navigation.controller.js',
+        paths.angular_dir + '/navigation/estabelecimentos.controller.js',
 
 		paths.angular_dir + '/home/home.controller.js',
 	])

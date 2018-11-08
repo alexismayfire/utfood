@@ -1,0 +1,12 @@
+- Usuario (nome, email, telefone)
+- Estabelecimento (nome, dono_FKUSER, endereço, telefone) (horarios???)
+- ColaboradoresEstabelecimento (colaborador_FKUSER, estabelecimento_FKESTABELECIMENTO) 
+- Cardapio (estabelecimento_FKESTABELECIMENTO, nome, status, pontos) (vigencia???)
+- CardapioPratos (cardapio_FKCARDAPIO, prato_FKPRATO)
+- Prato (titulo, descricao, tipo_cozinha, preco, foto)
+- Reserva (user_FKUSER, data_hora, status, comparecimento, pontos_gerados)
+- Avaliação (user_FKUSER, estrelas, tipoconteudo_FKTIPOCONTEUDO, tipoconteudo_id, comentario)
+- Favoritos (user_FKUSER, tipoconteudo_FKTIPOCONTEUDO, tipoconteudo_id)
+
+- TipoConteudo (1, Estabelecimento / 2, Cardápio / 3, Prato)
+
