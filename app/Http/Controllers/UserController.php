@@ -7,6 +7,10 @@ use App\User;
 
 class UserController extends Controller
 {
+    public function __construct() {
+        // $this->middleware('auth');
+    }
+
     /*
     public function show($id)
     {
@@ -14,8 +18,13 @@ class UserController extends Controller
     }
     */
 
-    public function list()
+    public function showAll()
     {
         return view('user.list', ['users' => User::all()]);
+    }
+
+    public function show(User $usuario)
+    {
+        return view('user.profile', ['user' => $usuario]);
     }
 }

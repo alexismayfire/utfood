@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
             html, body {
                 background-color: #fff;
@@ -64,15 +65,11 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="container-fluid">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
-                        <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
@@ -80,16 +77,28 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div>
-                    <div class="title">UTFood</div>
+            <div>
+                <div class="title m-b-md">
+                    Laravel
                 </div>
-
-                @auth
-                    <div class="links">
-                        <a href="{{ route('estabelecimentos') }}">Estabelecimentos</a>
+                <div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <img
+                                    class="card-img-top"
+                                    src="https://via.placeholder.com/350x150"
+                                    alt="{{ $estabelecimento->nome }}"
+                                >
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $estabelecimento->nome }}</h5>
+                                    <p class="card-text">Lorem ipsum</p>
+                                    <a href="#" class="btn btn-primary">Visit</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                @endauth
+                </div>
             </div>
         </div>
     </body>

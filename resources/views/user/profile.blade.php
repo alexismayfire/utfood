@@ -69,10 +69,6 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
-                        <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
@@ -81,15 +77,26 @@
             @endif
 
             <div class="content">
-                <div>
-                    <div class="title">UTFood</div>
+                <div class="title m-b-md">
+                    Laravel
                 </div>
 
-                @auth
-                    <div class="links">
-                        <a href="{{ route('estabelecimentos') }}">Estabelecimentos</a>
-                    </div>
-                @endauth
+                <div class="links">
+                    <a href="https://laravel.com/docs">Documentation</a>
+                    <a href="https://laracasts.com">Laracasts</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://nova.laravel.com">Nova</a>
+                    <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                </div>
+                <div>
+                    <label>Name:</label>
+                    <p>{{ $user->name }}</p>
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <p>{{ $user->email }}</p>
+                </div>
             </div>
         </div>
     </body>

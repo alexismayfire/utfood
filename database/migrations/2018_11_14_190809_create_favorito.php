@@ -4,27 +4,29 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEstabelecimentosTable extends Migration
+class CreateFavorito extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-
     public function up()
     {
-        Schema::create('estabelecimentos', function (Blueprint $table) {
+        Schema::create('favoritos', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('nome');
-            $table->integer('dono');
-            $table->string('endereco');
-            $table->string('telefone');
+            $table->integer('usuario');
+            $table->integer('tipo_conteudo');
             $table->timestamps();
 
-            $table->foreign('dono')
+            $table->foreign('usuario')
                 ->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('tipo_conteudo')
+                ->references('id')
+                ->on('tipo_conteudo')
                 ->onDelete('cascade');
         });
     }
@@ -36,6 +38,6 @@ class CreateEstabelecimentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estabelecimentos');
+        Schema::dropIfExists('favoritos');
     }
 }

@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Hashing\BcryptHasher;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,10 +14,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $hasher = new BcryptHasher();
+
         DB::table('users')->insert([
-            'nome' => 'Alexandre',
+            'name' => 'Alexandre',
             'email' => 'calexandrelvieira@gmail.com',
-            'senha' => bcrypt('teste'),
+            'password' => $hasher->make('teste'),
+            'remember_token' => str_random(10),
             'telefone' => '(41) 99857-0244'
         ]);
         factory(\App\User::class, 5);

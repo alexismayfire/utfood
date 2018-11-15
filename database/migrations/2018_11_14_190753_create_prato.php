@@ -4,27 +4,27 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEstabelecimentosTable extends Migration
+class CreatePrato extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-
     public function up()
     {
-        Schema::create('estabelecimentos', function (Blueprint $table) {
+        Schema::create('pratos', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('nome');
-            $table->integer('dono');
-            $table->string('endereco');
-            $table->string('telefone');
+            $table->string('titulo');
+            $table->string('descricao');
+            $table->integer('tipo_cozinha');
+            $table->decimal('preco');
+            # TODO: colocar ImageField para a foto
             $table->timestamps();
 
-            $table->foreign('dono')
+            $table->foreign('tipo_cozinha')
                 ->references('id')
-                ->on('users')
+                ->on('tipo_cozinha')
                 ->onDelete('cascade');
         });
     }
@@ -36,6 +36,6 @@ class CreateEstabelecimentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estabelecimentos');
+        Schema::dropIfExists('pratos');
     }
 }

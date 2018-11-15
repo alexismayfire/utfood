@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
             html, body {
                 background-color: #fff;
@@ -64,7 +65,7 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="container-fluid">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -76,25 +77,39 @@
                 </div>
             @endif
 
-            <div class="content">
+            <div>
                 <div class="title m-b-md">
                     Laravel
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-                <div>
-                    <ul>
+                <div class="row justify-content-center">
                     @foreach($estabelecimentos as $estabelecimento)
-                        <li>Local: {{ $estabelecimento->name }}</li>
+                        @php
+                            if(($loop->iteration - 1) % 3 == 0 || $loop->iteration == 1) {
+                                echo '<div class="row justify-content-center">';
+                            }
+                        @endphp
+                            <div class="col-sm-3">
+                                <div class="card">
+                                    <a href="{{ route('estabelecimento', ['estabelecimento' => $estabelecimento]) }}">
+                                        <img
+                                            class="card-img-top"
+                                            src="https://via.placeholder.com/350x150"
+                                            alt="{{ $estabelecimento->nome }}"
+                                        >
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $estabelecimento->nome }}</h5>
+                                        <p class="card-text">Lorem ipsum</p>
+                                        <a href="{{ route('estabelecimento', ['estabelecimento' => $estabelecimento]) }}" class="btn btn-primary">Visit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @php
+                            if($loop->iteration % 3 == 0) {
+                                echo '</div>';
+                            }
+                        @endphp
                     @endforeach
-                    </ul>
                 </div>
             </div>
         </div>
