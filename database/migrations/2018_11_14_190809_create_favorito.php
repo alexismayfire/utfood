@@ -16,7 +16,7 @@ class CreateFavorito extends Migration
         Schema::create('favoritos', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('usuario');
-            $table->integer('tipo_conteudo');
+            $table->integer('tipos_conteudo');
             $table->timestamps();
 
             $table->foreign('usuario')
@@ -24,9 +24,9 @@ class CreateFavorito extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->foreign('tipo_conteudo')
+            $table->foreign('tipos_conteudo')
                 ->references('id')
-                ->on('tipo_conteudo')
+                ->on('tipos_conteudo')
                 ->onDelete('cascade');
         });
     }

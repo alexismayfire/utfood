@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAvalicao extends Migration
+class CreateAvaliacao extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class CreateAvalicao extends Migration
             $table->increments('id');
             $table->integer('usuario');
             $table->integer('estrelas');
-            $table->integer('tipo_conteudo');
+            $table->integer('tipos_conteudo');
             $table->string('comentario');
             $table->timestamps();
 
@@ -26,9 +26,9 @@ class CreateAvalicao extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->foreign('tipo_conteudo')
+            $table->foreign('tipos_conteudo')
                 ->references('id')
-                ->on('tipo_conteudo')
+                ->on('tipos_conteudo')
                 ->onDelete('cascade');
         });
     }
