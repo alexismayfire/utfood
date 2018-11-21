@@ -18,6 +18,7 @@ class CreateAvaliacao extends Migration
             $table->integer('usuario');
             $table->integer('estrelas');
             $table->integer('tipos_conteudo');
+            $table->integer('tipo_conteudo_id');
             $table->string('comentario');
             $table->timestamps();
 

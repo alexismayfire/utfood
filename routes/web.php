@@ -28,18 +28,14 @@ Auth::routes();
 //Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', function() {
-    return view('welcome');
+    return view('home');
 });
 
 /* Rotas de admin */
 // Para gerenciar os usuários. Ex.: dar permissões?
 Route::get(
-    '/usuarios',
-    'UserController@showAll'
+    '/api/usuarios',
+    'UserController@exibirTodos'
 )->name('usuarios');
 
 /* Rotas de usuários */
@@ -47,19 +43,27 @@ Route::get(
 /*
  * Para visualizar o próprio perfil
  * Retorna: objeto do User logado
- *
  */
 Route::get(
-    '/conta',
+    '/api/conta',
     'UserController@conta'
 )->name('conta');
+
+/*
+ * Para atualizar o próprio perfil
+ * Retorna: objeto do User logado
+ */
+Route::post(
+    '/api/conta',
+    'UserController@editarConta'
+)->name('editar_conta');
 
 /*
  * Para ver a página de favoritos
  * Retorna: array de Favoritos do User logado
  */
 Route::get(
-    '/conta/favoritos',
+    '/api/conta/favoritos',
     'UserController@favoritos'
 )->name('favoritos');
 
@@ -68,16 +72,25 @@ Route::get(
  * Retorna: array de Reservas do User logado
  */
 Route::get(
-    '/conta/reservas',
+    '/api/conta/reservas',
     'UserController@reservas'
-)->name('reservas');
+)->name('minhas_reservas');
+
+/*
+ * Para gerenciar os estabelecimentos do usuário. O menu principal precisa ser alterado
+ * Retorna: lista de Estabelecimentos que o User logado possui
+ */
+Route::get(
+    '/api/conta/meus-estabelecimentos',
+    'UserController@gerenciarEstabelecimentos'
+)->name('meus_estabelecimentos');
 
 /*
  * Para ver outros perfis, como de amigos
  * Retorna: objeto de User
  */
 Route::get(
-    '/usuarios/{usuario}',
+    '/api/usuarios/{usuario}',
     'UserController@exibir'
 )->name('usuario');
 
@@ -86,7 +99,7 @@ Route::get(
  * Retorna: array de Estabelecimento
  */
 Route::get(
-    '/estabelecimentos',
+    '/api/estabelecimentos',
     'EstabelecimentoController@exibirTodos'
 )->name('estabelecimentos');
 
@@ -96,7 +109,7 @@ Route::get(
  * Retorna: objeto de Estabelecimento
  */
 Route::get(
-    '/estabelecimentos/{estabelecimento}',
+    '/api/estabelecimentos/{estabelecimento}',
     'EstabelecimentoController@exibir'
 )->name('estabelecimento');
 
@@ -107,7 +120,7 @@ Route::get(
  * Retorna: array de Cardapio
  */
 Route::get(
-    '/estabelecimentos/{estabelecimento}/cardapios',
+    '/api/estabelecimentos/{estabelecimento}/cardapios',
     'CardapioController@exibirTodos'
 )->name('cardapios');
 
@@ -117,7 +130,7 @@ Route::get(
  * Retorna: objeto de Cardapio
  */
 Route::get(
-    '/estabelecimentos/{estabelecimento}/cardapios/{cardapio}',
+    '/api/estabelecimentos/{estabelecimento}/cardapios/{cardapio}',
     'CardapioController@exibir'
 )->name('cardapio');
 
@@ -127,7 +140,7 @@ Route::get(
  * Retorna: array de Avaliacoes relacionadas ao TipoConteudo de Cardapio (o controller deve tratar isso)
  */
 Route::get(
-    '/estabelecimentos/{estabelecimento}/cardapios/{cardapio}/avaliacoes',
+    '/api/estabelecimentos/{estabelecimento}/cardapios/{cardapio}/avaliacoes',
     'AvaliacaoController@exibirCardapio'
 )->name('avaliacoes_cardapio');
 
@@ -136,7 +149,7 @@ Route::get(
  * Retorna: array de Avaliacoes relacionadas ao TipoConteudo de Estabelecimento (o controller deve tratar isso)
  */
 Route::get(
-    '/estabelecimentos/{estabelecimento}/avaliacoes',
+    '/api/estabelecimentos/{estabelecimento}/avaliacoes',
     'AvaliacaoController@exibirEstabelecimento'
 )->name('avaliacoes_estabelecimento');
 
@@ -147,7 +160,7 @@ Route::get(
  * Retorna: objeto de Avaliacao que foi criado (para atualizar o state?)
  */
 Route::post(
-    '/estabelecimentos/{estabelecimento}/avaliacoes',
+    '/api/estabelecimentos/{estabelecimento}/avaliacoes',
     'AvaliacaoController@avaliar'
 )->name('avaliar');
 
@@ -156,7 +169,7 @@ Route::post(
  * Retorna: array de DateTime
  */
 Route::get(
-    '/estabelecimentos/{estabelecimento}/reservas',
+    '/api/estabelecimentos/{estabelecimento}/reservas',
     'ReservaController@agenda'
 )->name('reservas');
 
@@ -166,7 +179,7 @@ Route::get(
  * Retorna: objeto Reserva criado (para atualizar o state?)
  */
 Route::post(
-    '/estabelecimentos/{estabelecimento}/reservas',
+    '/api/estabelecimentos/{estabelecimento}/reservas',
     'ReservaController@reservar'
 )->name('reservar');
 

@@ -4,17 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Estabelecimento;
+use App\Avaliacao;
 
 class EstabelecimentoController extends Controller
 {
-    public function showAll()
+    private $tipoConteudo = 1;
+
+    public function exibirTodos()
     {
         return view('estabelecimento.list', ['estabelecimentos' => Estabelecimento::all()]);
     }
 
-    public function show(Estabelecimento $estabelecimento)
+    public function exibir(Estabelecimento $estabelecimento)
     {
-        return view('estabelecimento.profile', ['estabelecimento' => $estabelecimento]);
+        $avaliacoes = Avaliacao::where([
+            ['tipos_conteudo', 1], ['tipo_conteudo_id', $estabelecimento->id]
+        ])->get();
+
+        return view(
+            'estabelecimento.profile',
+            ['estabelecimento' => $estabelecimento, 'avaliacoes' => $avaliacoes]
+        );
     }
 
     /*
