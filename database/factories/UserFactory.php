@@ -1,6 +1,8 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Hashing\BcryptHasher;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +16,11 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\User::class, function (Faker $faker) {
+    $hasher = new BcryptHasher();
     return [
-        'nome' => $faker->name,
+        'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'senha' => bcrypt('teste'), // '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm' secret
+        'password' => $hasher->make('teste'), // '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm' secret
         'remember_token' => str_random(10),
         'telefone' => $faker->phoneNumber
     ];

@@ -18,7 +18,7 @@ class CreateCardapio extends Migration
             $table->integer('estabelecimento');
             $table->string('nome');
             $table->integer('pontos');
-            $table->boolean('status');
+            $table->boolean('status')->default('true');
             $table->timestamps();
 
             $table->foreign('estabelecimento')
@@ -35,6 +35,6 @@ class CreateCardapio extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('cardapios');
     }
 }
