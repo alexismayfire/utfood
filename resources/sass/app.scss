@@ -63,3 +63,8 @@ html, body {
 .m-b-md {
     margin-bottom: 30px;
 }
+
+.ui.popup {
+    overflow: auto;
+    max-height: 50vh;
+}

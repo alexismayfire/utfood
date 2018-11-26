@@ -31,6 +31,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/home', function() {
+    return view('home');
+});
+
 /* Rotas de admin */
 // Para gerenciar os usuários. Ex.: dar permissões?
 Route::get(

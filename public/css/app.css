@@ -10535,3 +10535,8 @@ body {
   margin-bottom: 30px;
 }
 
+.ui.popup {
+  overflow: auto;
+  max-height: 50vh;
+}
+

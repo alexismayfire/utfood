@@ -37,13 +37,17 @@ class UserController extends Controller
     public function editarConta(Request $request)
     {
         $user = Auth::user();
-        $user->name = $request->input('nome', $user->name);
-        $user->email = $request->input('email', $user->email);
-        $user->telefone = $request->input('telefone', $user->telefone);
+        $props = ['name', 'email', 'telefone'];
 
-        return dd($request->all());
+        foreach($props as $key) {
+            if ($request->filled($key)) {
+                $user->$key = $request->input($key);
+            }
+        }
 
-        // return view('user.profile', ['usuario' => $user, 'data' => $request->post()]);
+        $user->save();
+
+        return view('user.profile', ['usuario' => $user]);
     }
 
     public function gerenciarEstabelecimentos()
