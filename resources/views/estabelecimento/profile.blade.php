@@ -15,45 +15,38 @@
                         </a>
                     </div>
                     <div class="content">
-                        <div class="header">{{ $estabelecimento->nome }}</div>
+                        <h1 class="ui header">{{ $estabelecimento->nome }}</h1>
                         <div class="meta">Japonesa</div>
                         <div class="description text-left">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id eleifend elit. Suspendisse euismod ligula eget sodales dapibus. Vivamus iaculis sagittis ipsum vel sollicitudin.</p>
                             <p>Quisque non ligula in ex imperdiet pulvinar vitae quis nisl. Sed nec purus enim. Integer luctus accumsan felis eget commodo. Vestibulum tristique iaculis nulla sed malesuada.</p>
                         </div>
-                        <div class="extra content">
-                            <div class="ui items">
-                                @foreach($cardapios as $cardapio)
-                                    <div class="item">
-                                        <div class="middle aligned content">
-                                            <div class="header">
-                                                {{ $cardapio->nome }}
-                                            </div>
-                                            <div class="description">
-                                                <div class="ui list">
-                                                    @foreach($cardapio->pratos as $prato)
-                                                        <div class="item">
-                                                            <div class="header">{{ $prato->titulo }}</div>
-                                                            {{ $prato->descricao }}
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                            <div class="extra">
-                                                <a href="#" class="ui right floated button">Reservar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                    </div>
+                    <h2 class="ui horizontal divider header"><i class="utensils mini icon"></i>Cardápios</h2>
+                    <div class="items">
+                        @foreach($cardapios as $cardapio)
+                            <div class="item">
+                                <div class="content">
+                                    @include('estabelecimento.cardapio')
+                                    @if(!$loop->last)
+                                        <div class="ui divider"></div>
+                                    @endif
+                                </div>
                             </div>
-                            <a href="{{ route('cardapios', ['estabelecimento' => $estabelecimento]) }}" class="ui basic primary button">Cardápio</a>
-                            <div>
-                                <h3>Avaliações dos usuários</h3>
-                                @foreach($avaliacoes as $avaliacao)
-                                    <p>{{ $avaliacao->comentario }}</p>
-                                @endforeach
-                            </div>
-                        </div>
+                        @endforeach
+                    </div>
+                    <h2 class="ui horizontal divider header"><i class="star mini icon"></i>Avaliações</h2>
+                    <div>
+                        @foreach($avaliacoes as $avaliacao)
+                            <div class="item">
+                                <div class="content">
+                                    @include('estabelecimento.avaliacoes')
+                                    @if(!$loop->last)
+                                        <div class="ui divider"></div>
+                                    @endif
+                                </div>
+                        @endforeach
+                    </div>
                     </div>
                 </div>
             </div>

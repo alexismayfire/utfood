@@ -11,9 +11,14 @@ class TiposConteudoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tipos_conteudo')->insert([
-            'id' => 1,
-            'tipo' => 1,
-        ]);
+        /*
+         * 1 => Estabelecimento
+         * 2 => Cardapio
+         * 3 => Prato
+         */
+
+        DB::table('tipos_conteudo')->insert(['tipo' => 1]);
+        DB::table('tipos_conteudo')->insert(['tipo' => 2]);
+        DB::table('tipos_conteudo')->insert(['tipo' => 3]);
     }
 }

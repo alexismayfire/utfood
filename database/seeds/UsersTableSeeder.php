@@ -30,6 +30,6 @@ class UsersTableSeeder extends Seeder
             'remember_token' => str_random(10),
             'telefone' => '(41) 9999-9999'
         ]);
-        factory(\App\User::class, 5);
+        factory(\App\User::class, 50);
     }
 }
