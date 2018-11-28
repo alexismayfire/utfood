@@ -18,6 +18,7 @@ class CreatePrato extends Migration
             $table->string('titulo');
             $table->string('descricao');
             $table->integer('tipo_cozinha');
+            $table->integer('cardapio');
             $table->decimal('preco');
             # TODO: colocar ImageField para a foto
             $table->timestamps();
@@ -25,6 +26,11 @@ class CreatePrato extends Migration
             $table->foreign('tipo_cozinha')
                 ->references('id')
                 ->on('tipo_cozinha')
+                ->onDelete('cascade');
+
+            $table->foreign('cardapio')
+                ->references('id')
+                ->on('cardapios')
                 ->onDelete('cascade');
         });
     }

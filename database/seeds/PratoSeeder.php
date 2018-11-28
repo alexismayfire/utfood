@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use \App\Prato;
 
-class CardapioSeeder extends Seeder
+class PratoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,6 @@ class CardapioSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Cardapio::class, 30)->create();
+        factory(Prato::class, 60)->create();
     }
 }

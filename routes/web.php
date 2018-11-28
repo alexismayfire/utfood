@@ -173,7 +173,7 @@ Route::post(
  * Retorna: array de DateTime
  */
 Route::get(
-    '/api/estabelecimentos/{estabelecimento}/reservas',
+    '/api/estabelecimentos/{estabelecimento}/{cardapio}/reservas',
     'ReservaController@agenda'
 )->name('reservas');
 
@@ -183,7 +183,7 @@ Route::get(
  * Retorna: objeto Reserva criado (para atualizar o state?)
  */
 Route::post(
-    '/api/estabelecimentos/{estabelecimento}/reservas',
+    '/api/estabelecimentos/{estabelecimento}/{cardapio}/reservas',
     'ReservaController@reservar'
 )->name('reservar');
 

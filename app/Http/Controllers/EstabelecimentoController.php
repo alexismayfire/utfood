@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cardapio;
 use Illuminate\Http\Request;
 use App\Estabelecimento;
 use App\Avaliacao;
@@ -21,9 +22,11 @@ class EstabelecimentoController extends Controller
             ['tipos_conteudo', 1], ['tipo_conteudo_id', $estabelecimento->id]
         ])->get();
 
+        $cardapios = Cardapio::where('estabelecimento', $estabelecimento->id)->get();
+
         return view(
             'estabelecimento.profile',
-            ['estabelecimento' => $estabelecimento, 'avaliacoes' => $avaliacoes]
+            ['estabelecimento' => $estabelecimento, 'avaliacoes' => $avaliacoes, 'cardapios' => $cardapios]
         );
     }
 
