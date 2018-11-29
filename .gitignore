@@ -3,6 +3,8 @@
 /public/storage
 /storage/*.key
 /vendor
+/codestyles
+/_linux
 /.idea
 /.vscode
 /.vagrant
