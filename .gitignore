@@ -15,3 +15,13 @@ yarn-error.log
 .env
 .phpunit.result.cache
 _ide_helper.php
+databaseDrivers.xml
+debugger.xml
+docker.xml
+find.xml
+log_highlighting.xml
+php.xml
+phpunit.xml
+project.default.xml
+remote-servers.xml
+vcs.xml
