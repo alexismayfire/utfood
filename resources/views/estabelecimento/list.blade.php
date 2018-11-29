@@ -1,39 +1,46 @@
 @extends('layouts.base')
 
 @section('content')
-    <div>
-        <div class="title m-b-md">
-            Estabelecimentos
-        </div>
-        <div class="row justify-content-center">
-            @foreach($estabelecimentos as $estabelecimento)
-                @php
-                    if(($loop->iteration - 1) % 3 == 0 || $loop->iteration == 1) {
-                    echo '<div class="row justify-content-center">';
-                        }
-                @endphp
-                <div class="col-sm-3">
-                    <div class="card">
-                        <a href="{{ route('estabelecimento', ['estabelecimento' => $estabelecimento]) }}">
-                            <img
-                                class="card-img-top"
-                                src="https://via.placeholder.com/350x150"
-                                alt="{{ $estabelecimento->nome }}"
-                            >
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $estabelecimento->nome }}</h5>
-                            <p class="card-text">Lorem ipsum</p>
-                            <a href="{{ route('estabelecimento', ['estabelecimento' => $estabelecimento]) }}" class="btn btn-primary">Visit</a>
-                        </div>
+    <div class="column">
+        <div class="ui centered vertically padded grid">
+            <div class="ten wide column">
+                <div class="ui segment raised padded">
+                    <h2 class="ui dividing header">Estabelecimentos</h2>
+                    <div class="ui divided items">
+                        @foreach($estabelecimentos as $estabelecimento)
+                            <div class="item">
+                                <div class="ui image">
+                                    <a href="{{ route('estabelecimento', ['estabelecimento' => $estabelecimento]) }}">
+                                        <img
+                                            src="https://via.placeholder.com/200x200"
+                                            alt="{{ $estabelecimento->nome }}"
+                                        >
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <div class="header">{{ $estabelecimento->nome }}</div>
+                                    <div class="meta">
+                                        <span class="cozinha">Japonesa</span>
+                                    </div>
+                                    <div class="description text-left">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id eleifend elit. Suspendisse euismod ligula eget sodales dapibus. Vivamus iaculis sagittis ipsum vel sollicitudin.</p>
+                                        <p>Quisque non ligula in ex imperdiet pulvinar vitae quis nisl. Sed nec purus enim. Integer luctus accumsan felis eget commodo. Vestibulum tristique iaculis nulla sed malesuada.</p>
+                                    </div>
+                                    <div class="extra">
+                                        <a class="ui right floated primary button" href="{{ route('estabelecimento', ['estabelecimento' => $estabelecimento]) }}">
+                                            Ver
+                                            <i class="right chevron icon"></i>
+                                        </a>
+                                        <span class="ui left floated">
+                                            <i class="green check icon"></i>
+                                            121 Avaliações
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
-                @php
-                    if($loop->iteration % 3 == 0) {
-                    echo '</div>';
-                }
-                @endphp
-            @endforeach
+            </div>
         </div>
     </div>
 @endsection

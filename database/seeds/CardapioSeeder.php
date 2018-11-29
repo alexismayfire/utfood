@@ -11,6 +11,6 @@ class CardapioSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Cardapio::class, 5)->create();
+        factory(\App\Cardapio::class, 30)->create();
     }
 }

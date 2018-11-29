@@ -31,6 +31,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/home', function() {
+    return view('home');
+});
+
 /* Rotas de admin */
 // Para gerenciar os usuários. Ex.: dar permissões?
 Route::get(
@@ -169,7 +173,7 @@ Route::post(
  * Retorna: array de DateTime
  */
 Route::get(
-    '/api/estabelecimentos/{estabelecimento}/reservas',
+    '/api/estabelecimentos/{estabelecimento}/{cardapio}/reservas',
     'ReservaController@agenda'
 )->name('reservas');
 
@@ -179,7 +183,7 @@ Route::get(
  * Retorna: objeto Reserva criado (para atualizar o state?)
  */
 Route::post(
-    '/api/estabelecimentos/{estabelecimento}/reservas',
+    '/api/estabelecimentos/{estabelecimento}/{cardapio}/reservas',
     'ReservaController@reservar'
 )->name('reservar');
 

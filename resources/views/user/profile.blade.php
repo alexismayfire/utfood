@@ -1,38 +1,28 @@
 @extends('layouts.base')
 
 @section('content')
-    <div>
-        <h3>{{ $usuario->name }}</h3>
-        <div class="row justify-content-center">
-            <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('editar_conta') }}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="nome">Nome: </label>
-                                <input
-                                    type="text" id="nome" class="form-control"
-                                    placeholder="{{ $usuario->name }}"
-                                />
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Nome: </label>
-                                <input
-                                    type="email" id="email" class="form-control"
-                                    placeholder="{{ $usuario->email }}"
-                                />
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Telefone: </label>
-                                <input
-                                    type="text" id="telefone" class="form-control"
-                                    placeholder="{{ $usuario->telefone }}"
-                                />
-                            </div>
-                            <button type="submit" class="btn btn-primary">Salvar</button>
-                        </form>
-                    </div>
+    <div class="column">
+        <div class="ui centered vertically padded grid">
+            <div class="six wide column">
+                <div class="ui segment raised padded">
+                    <h2 class="ui dividing header">Editar Conta</h2>
+                    <form class="ui form" method="POST" action="{{ route('editar_conta') }}">
+                        @csrf
+                        <p><strong>{{ $usuario->name }}</strong>, você pode atualizar seus dados preenchendo os campos que deseja alterar em seu cadastro:</p>
+                        <div class="field">
+                            <label for="name">Nome: </label>
+                            <input type="text" name="name" id="name" placeholder="{{ $usuario->name }}" value=""/>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email: </label>
+                            <input type="email" name="email" id="email" placeholder="{{ $usuario->email }}" value="" />
+                        </div>
+                        <div class="field">
+                            <label for="telefone">Telefone: </label>
+                            <input type="text" name="telefone" id="telefone" placeholder="{{ $usuario->telefone }}" value=""/>
+                        </div>
+                        <button type="submit" class="ui button">Salvar</button>
+                    </form>
                 </div>
             </div>
         </div>

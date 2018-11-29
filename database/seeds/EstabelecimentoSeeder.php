@@ -11,6 +11,6 @@ class EstabelecimentoSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Estabelecimento::class, 5)->create();
+        factory(\App\Estabelecimento::class, 10)->create();
     }
 }

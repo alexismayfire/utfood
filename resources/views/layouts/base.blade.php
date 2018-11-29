@@ -11,25 +11,27 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/semantic.min.css') }}" rel="stylesheet" type="text/css">
+
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+        <script src="{{ asset('js/semantic.min.js') }}"></script>
+        <script src="{{ asset('js/vanilla.js') }}" defer></script>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-
-        </style>
     </head>
     <body>
         <div id="app">
             @include('menu')
-            <div class="content">
+            <div class="ui grid container">
                 @yield('content')
             </div>
         </div>

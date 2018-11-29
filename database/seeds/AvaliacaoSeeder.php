@@ -11,12 +11,6 @@ class AvaliacaoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('avaliacoes')->insert([
-            'usuario' => 1,
-            'estrelas' => 3,
-            'tipos_conteudo' => 1,
-            'tipo_conteudo_id' => 1,
-            'comentario' => 'Ruim demais'
-        ]);
+        factory(\App\Avaliacao::class, 100)->create();
     }
 }
