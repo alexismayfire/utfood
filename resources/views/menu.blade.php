@@ -9,7 +9,6 @@
             <a class="item" style="" href="{{ route('estabelecimentos') }}">Estabelecimentos</a>
             <a class="item" href="{{ route('minhas_reservas') }}">Reservas</a>
             <a class="item" href="{{ route('favoritos') }}">Favoritos</a>
-            <a class="item" href="{{ route ('meus_estabelecimentos') }}">Meus Estabelecimentos</a>
             <a class="browse item" style="" id="menu_conta">
                 Conta
                 <i class="dropdown icon"></i>
@@ -19,6 +18,7 @@
                     <div class="column">
                         <div class="ui link list">
                             <a class="item" href="{{ route('editar_conta') }}">Editar Conta</a>
+                            <a class="item" href="{{ route ('meus_estabelecimentos') }}">Meus Estabelecimentos</a>
                             <a class="item" href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}

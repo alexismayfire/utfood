@@ -42,61 +42,73 @@ Route::get(
     'UserController@exibirTodos'
 )->name('usuarios');
 
-/* Rotas de usuários */
+Route::group(['middleware' => ['auth']], function () {
+    /* Rotas de usuários */
 
-/*
- * Para visualizar o próprio perfil
- * Retorna: objeto do User logado
- */
-Route::get(
-    '/api/conta',
-    'UserController@conta'
-)->name('conta');
+    /*
+     * Para visualizar o próprio perfil
+     * Retorna: objeto do User logado
+     */
+    Route::get(
+        '/api/conta',
+        'UserController@conta'
+    )->name('conta');
 
-/*
- * Para atualizar o próprio perfil
- * Retorna: objeto do User logado
- */
-Route::post(
-    '/api/conta',
-    'UserController@editarConta'
-)->name('editar_conta');
+    /*
+     * Para atualizar o próprio perfil
+     * Retorna: objeto do User logado
+     */
+    Route::post(
+        '/api/conta',
+        'UserController@editarConta'
+    )->name('editar_conta');
 
-/*
- * Para ver a página de favoritos
- * Retorna: array de Favoritos do User logado
- */
-Route::get(
-    '/api/conta/favoritos',
-    'UserController@favoritos'
-)->name('favoritos');
+    /*
+     * Para ver a página de favoritos
+     * Retorna: array de Favoritos do User logado
+     */
+    Route::get(
+        '/api/conta/favoritos',
+        'UserController@favoritos'
+    )->name('favoritos');
 
-/*
- * Para ver a página de reservas
- * Retorna: array de Reservas do User logado
- */
-Route::get(
-    '/api/conta/reservas',
-    'UserController@reservas'
-)->name('minhas_reservas');
+    /*
+     * Para ver a página de reservas
+     * Retorna: array de Reservas do User logado
+     */
+    Route::get(
+        '/api/conta/reservas',
+        'UserController@reservas'
+    )->name('minhas_reservas');
 
-/*
- * Para gerenciar os estabelecimentos do usuário. O menu principal precisa ser alterado
- * Retorna: lista de Estabelecimentos que o User logado possui
- */
-Route::get(
-    '/api/conta/meus-estabelecimentos',
-    'UserController@gerenciarEstabelecimentos'
-)->name('meus_estabelecimentos');
+    /*
+     * Para gerenciar os estabelecimentos do usuário. O menu principal precisa ser alterado
+     * Retorna: lista de Estabelecimentos que o User logado possui
+     */
+    Route::get(
+        '/api/conta/meus-estabelecimentos',
+        'UserController@gerenciarEstabelecimentos'
+    )->name('meus_estabelecimentos');
 
-/*
- * Para ver outros perfis, como de amigos
- * Retorna: objeto de User
- */
-Route::get(
-    '/api/usuarios/{usuario}',
-    'UserController@exibir'
-)->name('usuario');
+    Route::get(
+        '/api/conta/meus-estabelecimentos/criar',
+        function () { return view('estabelecimento.criar', ['usuario' => Auth::user()]); }
+    )->name('criar_estabelecimento');
+
+    Route::post(
+        '/api/conta/meus-estabelecimentos/criar',
+        'EstabelecimentoController@criar'
+    )->name('criar_estabelecimento');
+
+    /*
+     * Para ver outros perfis, como de amigos
+     * Retorna: objeto de User
+     */
+    Route::get(
+        '/api/usuarios/{usuario}',
+        'UserController@exibir'
+    )->name('usuario');
+});
 
 /*
  * Para ver a lista dos estabelecimentos

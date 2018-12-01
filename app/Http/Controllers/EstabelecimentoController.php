@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Cardapio;
 use Illuminate\Http\Request;
-use App\Estabelecimento;
+use Illuminate\Support\Facades\Auth;
 use App\Avaliacao;
+use App\Cardapio;
+use App\Estabelecimento;
+use App\UserEstabelecimento;
 
 class EstabelecimentoController extends Controller
 {
@@ -28,6 +30,25 @@ class EstabelecimentoController extends Controller
             'estabelecimento.profile',
             ['estabelecimento' => $estabelecimento, 'avaliacoes' => $avaliacoes, 'cardapios' => $cardapios]
         );
+    }
+
+    public function criar(Request $request)
+    {
+        $user = Auth::user();
+        $estabelecimento = new Estabelecimento;
+
+        $estabelecimento->nome = $request->input('nome');
+        $estabelecimento->endereco = $request->input('endereco');
+        $estabelecimento->telefone = $request->input('telefone');
+        $estabelecimento->dono = Auth::user()->id;
+        $estabelecimento->save();
+
+        $userEstabelecimento = new UserEstabelecimento;
+        $userEstabelecimento->user = $user->id;
+        $userEstabelecimento->estabelecimento = $estabelecimento->id;
+        $userEstabelecimento->save();
+
+        return $this->exibir($estabelecimento);
     }
 
     /*
