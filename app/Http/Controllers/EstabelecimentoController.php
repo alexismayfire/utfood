@@ -15,7 +15,16 @@ class EstabelecimentoController extends Controller
 
     public function exibirTodos()
     {
-        return view('estabelecimento.list', ['estabelecimentos' => Estabelecimento::all()]);
+        $estabelecimentos = Estabelecimento::all();
+        $avaliacoes[] = [];
+        foreach ($estabelecimentos as $estabelecimento)
+        {
+            $avaliacoes[$estabelecimento->id] = Avaliacao::where([
+                ['tipos_conteudo', 1], ['tipo_conteudo_id', $estabelecimento->id]
+            ])->count();
+        }
+
+        return view('estabelecimento.list', ['estabelecimentos' => $estabelecimentos, 'avaliacoesCount' => $avaliacoes]);
     }
 
     public function exibir(Estabelecimento $estabelecimento)

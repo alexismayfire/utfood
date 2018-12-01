@@ -33,7 +33,7 @@
                                         </a>
                                         <span class="ui left floated">
                                             <i class="green check icon"></i>
-                                            121 Avaliações
+                                            {{$avaliacoesCount[$estabelecimento->id]}}
                                         </span>
                                     </div>
                                 </div>
