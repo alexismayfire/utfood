@@ -100,6 +100,16 @@ Route::group(['middleware' => ['auth']], function () {
         'EstabelecimentoController@criar'
     )->name('criar_estabelecimento');
 
+    Route::get(
+        '/api/conta/meus-estabelecimentos/editar/{estabelecimento}',
+        'UserController@editarEstabelecimento'
+    )->name('editar_estabelecimento_view');
+
+
+    Route::post(
+        '/api/conta/meus-estabelecimentos/editar',
+        'EstabelecimentoController@editar'
+    )->name('editar_estabelecimento_post');
     /*
      * Para ver outros perfis, como de amigos
      * Retorna: objeto de User
@@ -150,6 +160,16 @@ Route::get(
     'CardapioController@exibir'
 )->name('cardapio');
 
+Route::get(
+    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/{cardapio}',
+    'CardapioController@viewCriar'
+)->name('criar_cardapio_view');
+
+Route::post(
+    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/cardapios/criar-cardapio',
+    'CardapioController@criar'
+)->name('criar_cardapio_post');
+
 /*
  * Para ver as avaliações de um cardápio.
  * Aqui não sei se é um controller separado. Mesmo caso de exibir as avaliações do estabelecimento!
@@ -198,6 +218,17 @@ Route::post(
     '/api/estabelecimentos/{estabelecimento}/{cardapio}/reservas',
     'ReservaController@reservar'
 )->name('reservar');
+
+/*
+ * Para adicionar um prato à um cardápio
+ * Exige: Dados do prato
+ * Retorna: View de cadastro de cardápio atualizada com o prato inserido
+ */
+
+Route::post(
+    '/api/conta/meus-estabelecimentos/editar/{estabelecimento}/{cardapio}/criar-prato',
+    'PratoController@criar'
+)->name('criar_prato');
 
 /*
  * Aqui são as rotas usando Collections (da pasta App/Http/Resources).

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Cardapio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Estabelecimento;
+use App\Avaliacao;
+use App\Prato;
 
 class UserController extends Controller
 {
@@ -57,10 +60,35 @@ class UserController extends Controller
         $estabelecimentos = Estabelecimento::join('user_estabelecimento', function($join)
         {
             $join->on('user_estabelecimento.estabelecimento', '=', 'estabelecimentos.id');
-        })
-            ->where('user_estabelecimento.user', $user->id)
-            ->get();
+        })->where('user_estabelecimento.user', $user->id)
+          ->get();
 
-        return view('estabelecimento.list_user', ['estabelecimentos' => $estabelecimentos]);
+        $avaliacoes[] = [];
+        foreach ($estabelecimentos as $estabelecimento)
+        {
+            $avaliacoes[$estabelecimento->id] = Avaliacao::where([
+                ['tipos_conteudo', 1], ['tipo_conteudo_id', $estabelecimento->estabelecimento]
+            ])->count();
+        }
+
+        return view('estabelecimento.list_user', ['estabelecimentos' => $estabelecimentos, 'avaliacoesCount' => $avaliacoes]);
+    }
+
+    public function editarEstabelecimento(Estabelecimento $estabelecimento)
+    {
+        $pratosCardapio = [];
+        $cardapios = Cardapio::where([
+            ['estabelecimento', $estabelecimento->id]
+        ])->get();
+
+        foreach ($cardapios as $cardapio)
+        {
+            $pratosCardapio[$cardapio->id] = Prato::where([
+                ['cardapio', $cardapio->id]
+            ])->get();
+        }
+
+        return view('estabelecimento.editar',
+            ['usuario' => Auth::user(), 'estabelecimento' => $estabelecimento, 'cardapios' => $cardapios, 'pratosCardapio' => $pratosCardapio ]);
     }
 }

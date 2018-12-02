@@ -28,13 +28,17 @@
                                             <p>Quisque non ligula in ex imperdiet pulvinar vitae quis nisl. Sed nec purus enim. Integer luctus accumsan felis eget commodo. Vestibulum tristique iaculis nulla sed malesuada.</p>
                                         </div>
                                         <div class="extra">
-                                            <a class="ui right floated primary button" href="{{ route('estabelecimento', ['estabelecimento' => $estabelecimento]) }}">
+                                            <a class="ui right floated primary button" href="{{ route('editar_estabelecimento_view', ['estabelecimento' => $estabelecimento->estabelecimento]) }}">
+                                                Editar
+                                                <i class="right chevron icon"></i>
+                                            </a>
+                                            <a class="ui right floated primary button" href="{{ route('estabelecimento', ['estabelecimento' => $estabelecimento->estabelecimento]) }}">
                                                 Ver
                                                 <i class="right chevron icon"></i>
                                             </a>
                                             <span class="ui left floated">
                                                 <i class="green check icon"></i>
-                                                121 Avaliações
+                                                {{$avaliacoesCount[$estabelecimento->id]}}
                                             </span>
                                         </div>
                                     </div>
@@ -45,6 +49,12 @@
                         <p>Você não possui estabelecimentos para gerenciar!</p>
                     @endif
             </div>
+                <div>
+                    <a class="ui right floated primary button" href="{{ route('criar_estabelecimento') }}">
+                        Novo Estabelecimento
+                        <i class="right plus icon"></i>
+                    </a>
+                </div>
         </div>
     </div>
 @endsection

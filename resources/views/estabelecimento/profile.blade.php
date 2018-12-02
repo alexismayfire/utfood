@@ -10,7 +10,7 @@
                             <img
                                 class="card-img-top"
                                 src="https://via.placeholder.com/700x300"
-                                alt="{{ $estabelecimento->nome }}"
+                                alt="{{ $estabelecimento->nome}}"
                             >
                         </a>
                     </div>
