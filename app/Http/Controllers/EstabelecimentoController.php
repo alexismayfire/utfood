@@ -60,6 +60,25 @@ class EstabelecimentoController extends Controller
         return $this->exibir($estabelecimento);
     }
 
+    public function editar(Request $request, Estabelecimento $estabelecimento)
+    {
+        $user = Auth::user();
+        $estabelecimento = new Estabelecimento;
+
+        $estabelecimento->nome = $request->input('nome');
+        $estabelecimento->endereco = $request->input('endereco');
+        $estabelecimento->telefone = $request->input('telefone');
+        $estabelecimento->dono = Auth::user()->id;
+        $estabelecimento->save();
+
+        $userEstabelecimento = new UserEstabelecimento;
+        $userEstabelecimento->user = $user->id;
+        $userEstabelecimento->estabelecimento = $estabelecimento->id;
+        $userEstabelecimento->save();
+
+        return $this->exibir($estabelecimento);
+    }
+
     /*
      * Com essa função, é possível acessar o estabelecimento através de uma slug, ao invés do ID na url
     public function getRouteKeyName() {
