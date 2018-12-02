@@ -29,13 +29,13 @@ module.exports = {
       config      : 'src/theme.config',
       definitions : 'src/definitions/',
       site        : 'src/site/',
-      themes      : 'src/themes/'
+      themes      : 'src/datepicker/'
     },
     output: {
       packaged     : 'dist/',
       uncompressed : 'dist/components/',
       compressed   : 'dist/components/',
-      themes       : 'dist/themes/'
+      themes       : 'dist/datepicker/'
     },
     clean : 'dist/'
   },

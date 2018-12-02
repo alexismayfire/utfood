@@ -13,12 +13,11 @@
                             </div>
                         </div>
                     </div>
-
                 @endforeach
             </div>
         </div>
     </div>
     <div class="four wide column center aligned">
-        <a href="#" class="ui button">Reservar</a>
+        <a href="{{ route('reservas', ['estabelecimento' => $estabelecimento, 'cardapio' => $cardapio]) }}" class="ui button">Reservar</a>
     </div>
 </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Estabelecimento;
+use App\Reserva;
 
 class UserController extends Controller
 {
@@ -62,5 +63,13 @@ class UserController extends Controller
             ->get();
 
         return view('estabelecimento.list_user', ['estabelecimentos' => $estabelecimentos]);
+    }
+
+    public function reservas()
+    {
+        $usuario = Auth::user();
+        $reservas = Reserva::where('usuario', $usuario->id)->get();
+
+        return view('user.reservas', compact('usuario', 'reservas'));
     }
 }

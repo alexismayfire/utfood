@@ -87,11 +87,11 @@ module.exports = {
         CSS URLs
     ---------------*/
 
-    // determine asset paths in css by finding relative path between themes and output
+    // determine asset paths in css by finding relative path between datepicker and output
     // force forward slashes
 
     config.paths.assets = {
-      source       : '../../themes', // source asset path is always the same
+      source       : '../../datepicker', // source asset path is always the same
       uncompressed : './' + path.relative(config.paths.output.uncompressed, config.paths.output.themes).replace(/\\/g, '/'),
       compressed   : './' + path.relative(config.paths.output.compressed, config.paths.output.themes).replace(/\\/g, '/'),
       packaged     : './' + path.relative(config.paths.output.packaged, config.paths.output.themes).replace(/\\/g, '/')

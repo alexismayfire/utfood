@@ -301,7 +301,7 @@ gulp.task('create install files', function(callback) {
     console.info('Copying UI definitions');
     wrench.copyDirSyncRecursive(source.definitions, installPaths.definition, settings.wrench.overwrite);
 
-    console.info('Copying UI themes');
+    console.info('Copying UI datepicker');
     wrench.copyDirSyncRecursive(source.themes, installPaths.theme, settings.wrench.merge);
     wrench.copyDirSyncRecursive(source.defaultTheme, installPaths.defaultTheme, settings.wrench.overwrite);
 

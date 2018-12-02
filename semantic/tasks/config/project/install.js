@@ -203,7 +203,7 @@ module.exports = {
         packaged     : path.normalize(answers.dist + '/'),
         uncompressed : path.normalize(answers.dist + '/components/'),
         compressed   : path.normalize(answers.dist + '/components/'),
-        themes       : path.normalize(answers.dist + '/themes/')
+        themes       : path.normalize(answers.dist + '/datepicker/')
       };
     }
 
@@ -245,8 +245,8 @@ module.exports = {
     tasks        : './tasks',
     themeConfig  : './src/theme.config.example',
     themeImport  : './src/theme.less',
-    themes       : './src/themes',
-    defaultTheme : './src/themes/default',
+    themes       : './src/datepicker',
+    defaultTheme : './src/datepicker/default',
     userGulpFile : './tasks/config/npm/gulpfile.js'
   },
 
@@ -269,7 +269,7 @@ module.exports = {
     tasks        : 'tasks/',
     themeConfig  : 'src/',
     themeImport  : 'src/',
-    themes       : 'src/themes/',
+    themes       : 'src/datepicker/',
 
     defaultTheme : 'default/' // only path that is relative to another directory and not root
   },

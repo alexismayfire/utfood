@@ -190,6 +190,15 @@ Route::get(
 )->name('reservas');
 
 /*
+ * Para ver os horários disponíveis de reserva.
+ * Retorna: array de DateTime
+ */
+Route::get(
+    '/api/estabelecimentos/{estabelecimento}/{cardapio}/reservas/{dataEscolhida}',
+    'ReservaController@horariosDisponiveis'
+)->name('reservas_horarios_disponiveis');
+
+/*
  * Para reservar um horário específico.
  * Exige: objeto DateTime via POST
  * Retorna: objeto Reserva criado (para atualizar o state?)
@@ -197,7 +206,7 @@ Route::get(
 Route::post(
     '/api/estabelecimentos/{estabelecimento}/{cardapio}/reservas',
     'ReservaController@reservar'
-)->name('reservar');
+)->name('reservas');
 
 /*
  * Aqui são as rotas usando Collections (da pasta App/Http/Resources).

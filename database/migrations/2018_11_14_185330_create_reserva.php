@@ -20,7 +20,7 @@ class CreateReserva extends Migration
             $table->dateTime('data');
             $table->boolean('status')->default('true');
             $table->boolean('comparecimento')->default('false');
-            $table->integer('pontos_gerados');
+            $table->integer('pontos_gerados')->nullable(true);
             $table->timestamps();
 
             $table->foreign('usuario')

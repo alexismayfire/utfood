@@ -17,14 +17,14 @@ Package.onUse(function(api) {
 
   api.addFiles([
     // icons
-    'themes/default/assets/fonts/icons.eot',
-    'themes/default/assets/fonts/icons.svg',
-    'themes/default/assets/fonts/icons.ttf',
-    'themes/default/assets/fonts/icons.woff',
-    'themes/default/assets/fonts/icons.woff2',
+    'datepicker/default/assets/fonts/icons.eot',
+    'datepicker/default/assets/fonts/icons.svg',
+    'datepicker/default/assets/fonts/icons.ttf',
+    'datepicker/default/assets/fonts/icons.woff',
+    'datepicker/default/assets/fonts/icons.woff2',
 
     // flags
-    'themes/default/assets/images/flags.png',
+    'datepicker/default/assets/images/flags.png',
 
     // release
     'semantic.css',

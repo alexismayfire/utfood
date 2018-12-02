@@ -152,7 +152,7 @@ module.exports = function(callback) {
             components,
             releases
           ;
-          themes = gulp.src('dist/themes/default/**/*', { base: 'dist/' })
+          themes = gulp.src('dist/datepicker/default/**/*', { base: 'dist/' })
             .pipe(gulp.dest(outputDirectory))
           ;
           components = gulp.src('dist/components/*', { base: 'dist/' })
@@ -188,7 +188,7 @@ module.exports = function(callback) {
           siteTheme = gulp.src('src/_site/**/*', { base: 'src/' })
             .pipe(gulp.dest(outputDirectory))
           ;
-          themes = gulp.src('src/themes/**/*', { base: 'src/' })
+          themes = gulp.src('src/datepicker/**/*', { base: 'src/' })
             .pipe(gulp.dest(outputDirectory))
           ;
           return mergeStream(definitions, themeImport, themeConfig, siteTheme, themes);
