@@ -12,4 +12,9 @@ class Estabelecimento extends Model
      * @var array
      */
     protected $fillable = ['nome', 'endereco', 'telefone'];
+
+    public function cardapios()
+    {
+        return $this->hasMany('App\Cardapio');
+    }
 }

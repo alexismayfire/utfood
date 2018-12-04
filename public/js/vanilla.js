@@ -39,6 +39,8 @@ $(function() {
         onClose: limparHorarios
     });
 
+    $('.ui.radio.checkbox').checkbox();
+
     $('.message .close').on('click', function() {
         $(this).closest('.message').transition('fade');
     });
@@ -76,7 +78,7 @@ $(function() {
                         $wrapper.append(
                             '<div class="field">' +
                                 '<div class="ui radio checkbox">' +
-                                    '<input type="radio" name="'+ key + '" tabindex="0" class="hidden">' +
+                                    '<input type="radio" name="hora" tabindex="0" value="' + key + '" class="hidden">' +
                                     '<label>' + key + 'h</label>' +
                                 '</div>' +
                             '</div>'
@@ -85,7 +87,7 @@ $(function() {
                         $wrapper.append(
                             '<div class="field">' +
                                 '<div class="ui radio checkbox">' +
-                                    '<input type="radio" name="'+ key + '" tabindex="0" class="hidden" disabled>' +
+                                    '<input type="radio" name="hora" tabindex="0" value="' + key + '" class="hidden" disabled>' +
                                     '<label>' + key + 'h</label>' +
                                 '</div>' +
                             '</div>'

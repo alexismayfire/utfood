@@ -15,20 +15,20 @@ class CreateReserva extends Migration
     {
         Schema::create('reservas', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('usuario');
-            $table->integer('cardapio');
+            $table->integer('usuario_id');
+            $table->integer('cardapio_id');
             $table->dateTime('data');
             $table->boolean('status')->default('true');
             $table->boolean('comparecimento')->default('false');
             $table->integer('pontos_gerados')->nullable(true);
             $table->timestamps();
 
-            $table->foreign('usuario')
+            $table->foreign('usuario_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->foreign('cardapio')
+            $table->foreign('cardapio_id')
                 ->references('id')
                 ->on('cardapios')
                 ->onDelete('cascade');

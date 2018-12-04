@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 
 class ReservaController extends Controller
 {
+    public function reservasUsuario($usuario)
+    {
+        return Reserva::where('usuario_id', $usuario->id)->get();
+    }
+
     public function agenda(Estabelecimento $estabelecimento, Cardapio $cardapio)
     {
         return view(
@@ -26,7 +31,7 @@ class ReservaController extends Controller
     {
         $carbonData = new Carbon($dataEscolhida);
         $reservas = Reserva::select('data', DB::raw('count(*) as total'))
-            ->where('cardapio', $cardapio->id)
+            ->where('cardapio_id', $cardapio->id)
             ->whereDate('data', $carbonData)
             /*
             ->groupBy(function($reserva) {
@@ -60,17 +65,22 @@ class ReservaController extends Controller
         $calendario = new Calendario(Periodo::Todos);
         $horaEscolhida = null;
 
+        // Checagem caso o user tente manipular o radio input
+        if (array_key_exists($request->input('hora'), $calendario->horarios)) {
+            $horaEscolhida = $request->input('hora');
+        }
+        /*
         foreach($request->all() as $key => $value) {
             if (array_key_exists($key, $calendario->horarios)) {
                 $horaEscolhida = $key;
             }
         }
-
+        */
         if ($horaEscolhida) {
             $carbonData = new Carbon($request->input('data'));
             $carbonData->hour($horaEscolhida);
             $reservas = Reserva::select('data', DB::raw('count(*) as total'))
-                ->where('cardapio', $cardapio->id)
+                ->where('cardapio_id', $cardapio->id)
                 ->whereDate('data', $carbonData)
                 ->groupBy('data')
                 ->pluck('total', 'data');
@@ -81,8 +91,8 @@ class ReservaController extends Controller
 
             if ($reservas->isEmpty()) {
                 $novaReserva = Reserva::create([
-                    'usuario' => Auth::user()->id,
-                    'cardapio' => $cardapio->id,
+                    'usuario_id' => Auth::user()->id,
+                    'cardapio_id' => $cardapio->id,
                     'data' => $carbonData->hour($horaEscolhida)
                 ]);
             } else {
@@ -95,8 +105,8 @@ class ReservaController extends Controller
                         if ($qtd < $limite) {
                             // Pode marcar, tem horário disponível
                             $novaReserva = Reserva::create([
-                                'usuario' => Auth::user()->id,
-                                'cardapio' => $cardapio->id,
+                                'usuario_id' => Auth::user()->id,
+                                'cardapio_id' => $cardapio->id,
                                 'data' => $carbonData->hour($horaEscolhida)
                             ]);
                             break;

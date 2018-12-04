@@ -24,7 +24,7 @@
                     </div>
                     <h2 class="ui horizontal divider header"><i class="utensils mini icon"></i>Cardápios</h2>
                     <div class="items">
-                        @foreach($cardapios as $cardapio)
+                        @foreach($estabelecimento->cardapios as $cardapio)
                             <div class="item">
                                 <div class="content">
                                     @include('estabelecimento.cardapio')

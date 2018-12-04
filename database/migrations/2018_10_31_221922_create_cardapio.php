@@ -15,13 +15,13 @@ class CreateCardapio extends Migration
     {
         Schema::create('cardapios', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('estabelecimento');
+            $table->integer('estabelecimento_id');
             $table->string('nome');
             $table->integer('pontos');
             $table->boolean('status')->default('true');
             $table->timestamps();
 
-            $table->foreign('estabelecimento')
+            $table->foreign('estabelecimento_id')
                 ->references('id')
                 ->on('estabelecimentos')
                 ->onDelete('cascade');

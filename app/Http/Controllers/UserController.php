@@ -58,7 +58,8 @@ class UserController extends Controller
     public function reservas()
     {
         $usuario = Auth::user();
-        $reservas = Reserva::where('usuario', $usuario->id)->get();
+        $reservaController = new ReservaController();
+        $reservas = $reservaController->reservasUsuario($usuario);
 
         return view('user.reservas', compact('usuario', 'reservas'));
     }
