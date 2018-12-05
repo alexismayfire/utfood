@@ -78,8 +78,18 @@ Route::group(['middleware' => ['auth']], function () {
      */
     Route::get(
         '/api/conta/reservas',
-        'UserController@reservas'
+        'ReservaController@reservasUsuario'
     )->name('minhas_reservas');
+
+    /*
+     * Para cancelar uma reserva.
+     * Exige: Integer (reserva_id) via POST
+     * Retorna: View user.reservas
+    */
+    Route::post(
+        '/api/conta/reservas/{reserva}',
+        'ReservaController@cancelar'
+    )->name('cancelar_minha_reserva');
 
     /*
      * Para gerenciar os estabelecimentos do usuário. O menu principal precisa ser alterado
@@ -201,8 +211,8 @@ Route::post(
 )->name('avaliar');
 
 /*
- * Para ver os horários disponíveis de reserva.
- * Retorna: array de DateTime
+ * Para buscar reservas em um estabelecimento.
+ * Retorna: View estabelecimento.reservas
  */
 Route::get(
     '/api/estabelecimentos/{estabelecimento}/{cardapio}/reservas',
@@ -210,7 +220,8 @@ Route::get(
 )->name('reservas');
 
 /*
- * Para ver os horários disponíveis de reserva.
+ * Para ver os horários disponíveis de reserva, via solicitação AJAX.
+ * Exige: objeto DateTime via POST
  * Retorna: array de DateTime
  */
 Route::get(
@@ -220,8 +231,8 @@ Route::get(
 
 /*
  * Para reservar um horário específico.
- * Exige: objeto DateTime via POST
- * Retorna: objeto Reserva criado (para atualizar o state?)
+ * Exige: Integer (hora) via POST
+ * Retorna: View estabelecimento.reservas
  */
 Route::post(
     '/api/estabelecimentos/{estabelecimento}/{cardapio}/reservas',

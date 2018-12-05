@@ -14,9 +14,20 @@ use Illuminate\Http\Request;
 
 class ReservaController extends Controller
 {
-    public function reservasUsuario($usuario)
+    public function cancelar(Reserva $reserva)
     {
-        return Reserva::where('usuario_id', $usuario->id)->get();
+        $reserva->delete();
+        $this->reservasUsuario();
+
+        return redirect()->route('minhas_reservas');
+    }
+
+    public function reservasUsuario()
+    {
+        $usuario = Auth::user();
+        $reservas = Reserva::where('usuario_id', $usuario->id)->get();
+
+        return view('user.reservas', compact('usuario', 'reservas'));
     }
 
     public function agenda(Estabelecimento $estabelecimento, Cardapio $cardapio)

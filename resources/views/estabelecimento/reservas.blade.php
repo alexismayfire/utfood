@@ -1,16 +1,5 @@
 @extends('layouts.base')
 
-@section('style')
-    <link href="{{ asset('css/datepicker/default.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/datepicker/default.date.css') }}" rel="stylesheet" type="text/css">
-@endsection
-
-@section('script')
-    <script src="{{ asset('js/legacy.js') }}"></script>
-    <script src="{{ asset('js/picker.js') }}"></script>
-    <script src="{{ asset('js/picker.date.js') }}"></script>
-@endsection
-
 @section('content')
 <div class="column">
     <div class="ui centered vertically padded grid">

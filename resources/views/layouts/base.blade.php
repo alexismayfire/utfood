@@ -14,6 +14,8 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/semantic.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/datepicker/default.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/datepicker/default.date.css') }}" rel="stylesheet" type="text/css">
         @yield('style')
 
         <!-- Scripts -->
@@ -22,7 +24,10 @@
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>
         <script src="{{ asset('js/semantic.min.js') }}"></script>
-        <script src="{{ asset('js/vanilla.js') }}" defer></script>
+        <script src="{{ asset('js/legacy.js') }}"></script>
+        <script src="{{ asset('js/picker.js') }}"></script>
+        <script src="{{ asset('js/picker.date.js') }}"></script>
+        <script src="{{ asset('js/vanilla.js') }}"></script>
         @yield('script')
 
         <!-- Fonts -->
@@ -32,6 +37,7 @@
     <body>
         <div id="app">
             @include('menu')
+            @yield('modal')
             <div class="ui grid container">
                 @yield('content')
             </div>

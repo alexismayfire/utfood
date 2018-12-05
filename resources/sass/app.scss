@@ -6,7 +6,7 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
   background-color: #fff;
@@ -41,11 +41,11 @@ html, body {
     right: 10px;
     top: 18px;
 }
-
+/*
 .content {
     text-align: center;
 }
-
+*/
 .title {
     font-size: 84px;
 }
@@ -67,4 +67,11 @@ html, body {
 .ui.popup {
     overflow: auto;
     max-height: 50vh;
+}
+
+.semantic-modal {
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
 }

@@ -55,15 +55,6 @@ class UserController extends Controller
         return view('user.profile', ['usuario' => $user]);
     }
 
-    public function reservas()
-    {
-        $usuario = Auth::user();
-        $reservaController = new ReservaController();
-        $reservas = $reservaController->reservasUsuario($usuario);
-
-        return view('user.reservas', compact('usuario', 'reservas'));
-    }
-
     public function gerenciarEstabelecimentos()
     {
         $user = Auth::user();

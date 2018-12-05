@@ -1,11 +1,12 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="column">
-        <div class="ui centered vertically padded grid">
-            <div class="six wide column">
-                <div class="ui segment raised padded">
-                    <h2 class="ui dividing header">Minhas Reservas</h2>
+<div class="column">
+    <div class="ui centered vertically padded grid">
+        <div class="six wide column">
+            <div class="ui segment raised padded">
+                <h2 class="ui dividing header">Minhas Reservas</h2>
+                @if($reservas)
                     <div class="ui divided items">
                         @foreach($reservas as $reserva)
                             <div class="item">
@@ -21,14 +22,45 @@
                                         @if($reserva->pontos)
                                             <div class="ui label left floated purple"><i class="certificate icon"></i>{{ $reserva->pontos }} pontos acumulados</div>
                                         @endif
-                                        <a class="ui right floated primary button" href="#">Cancelar<i class="right chevron icon"></i></a>
+                                        <button class="ui right floated red button cancelar reserva"
+                                                data-submit="{{ route('cancelar_minha_reserva', ['reserva' => $reserva->id]) }}"
+                                                data-horario="{{ $reserva->data->format('d/m/Y \à\s H\h') }}"
+                                                data-estabelecimento="{{ $reserva->cardapio->estabelecimento->nome }}"
+                                        >
+                                            Cancelar<i class="right chevron icon"></i>
+                                        </button>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                </div>
+                @endif
             </div>
         </div>
+    </div>
+</div>
+@endsection
+
+@section('modal')
+    <div class="ui tiny modal">
+        <div class="ui icon header">
+            <i class="calendar times outline icon"></i>
+            Cancelar Reserva
+        </div>
+        <div class="content">
+        <p>Tem certeza que deseja cancelar a reserva para o dia <span id="horario-reserva"></span>, em <span id="estabelecimento-reserva"></span>?</p>
+        </div>
+        <form class="actions" action="" method="post" id="cancelarReservaUsuario">
+            @csrf
+            <div class="ui gray cancel button">
+                <i class="remove icon"></i>
+                Voltar
+            </div>
+            <button class="ui red ok button" type="submit">
+                <i class="checkmark icon"></i>
+                Cancelar
+            </button>
+        </form>
     </div>
 @endsection

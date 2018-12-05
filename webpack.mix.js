@@ -15,5 +15,6 @@ const mix = require('laravel-mix');
 mix.sass('resources/sass/app.scss', 'public/css')
     .scripts([
         'resources/js/menu.js',
-        'resources/js/forms.js'
+        'resources/js/forms.js',
+        'resources/js/userReservas.js'
     ], 'public/js/vanilla.js');
