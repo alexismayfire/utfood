@@ -8,6 +8,7 @@ use App\Avaliacao;
 use App\Cardapio;
 use App\Estabelecimento;
 use App\UserEstabelecimento;
+use App\Prato;
 
 class EstabelecimentoController extends Controller
 {
@@ -60,23 +61,36 @@ class EstabelecimentoController extends Controller
         return $this->exibir($estabelecimento);
     }
 
+    public function editarEstabelecimento(Estabelecimento $estabelecimento)
+    {
+        $pratosCardapio = [];
+        $cardapios = Cardapio::where([
+            ['estabelecimento_id', $estabelecimento->id]
+        ])->get();
+
+        foreach ($cardapios as $cardapio)
+        {
+            $pratosCardapio[$cardapio->id] = Prato::where([
+                ['cardapio', $cardapio->id]
+            ])->get();
+        }
+
+        return view('estabelecimento.editar',
+            ['usuario' => Auth::user(), 'estabelecimento' => $estabelecimento, 'cardapios' => $cardapios, 'pratosCardapio' => $pratosCardapio ]);
+    }
+
     public function editar(Request $request, Estabelecimento $estabelecimento)
     {
         $user = Auth::user();
-        $estabelecimento = new Estabelecimento;
+        $estabelecimento = Estabelecimento::find($estabelecimento->id);
 
-        $estabelecimento->nome = $request->input('nome');
-        $estabelecimento->endereco = $request->input('endereco');
-        $estabelecimento->telefone = $request->input('telefone');
-        $estabelecimento->dono = Auth::user()->id;
+        if($request->input('nome')) $estabelecimento->nome = $request->input('nome');
+        if($request->input('endereco')) $estabelecimento->endereco = $request->input('endereco');
+        if($request->input('telefone')) $estabelecimento->telefone = $request->input('telefone');
+
         $estabelecimento->save();
 
-        $userEstabelecimento = new UserEstabelecimento;
-        $userEstabelecimento->user = $user->id;
-        $userEstabelecimento->estabelecimento = $estabelecimento->id;
-        $userEstabelecimento->save();
-
-        return $this->exibir($estabelecimento);
+        return $this->editarEstabelecimento($estabelecimento);
     }
 
     /*

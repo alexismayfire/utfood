@@ -16,11 +16,11 @@
                                     </div>
                                     <div class="column">
                                         <a class="ui primary button"
-                                           href="{{ route('criar_cardapio_view', ['estabelecimento' => $estabelecimento, 'cardapio' => $cardapio])}}">
-                                            <i class="right chevron icon"></i>
+                                           href="{{ route('editar_cardapio_view', ['estabelecimento' => $estabelecimento, 'cardapio' => $cardapio])}}">
+                                            Editar
                                         </a>
                                         <a class="ui red button"
-                                           href="{{ route('criar_cardapio_view', ['estabelecimento' => $estabelecimento, 'cardapio' => $cardapio])}}">
+                                           href="{{ route('remover_cardapio', ['estabelecimento' => $estabelecimento, 'idCardapio' => $cardapio->id])}}">
                                             <i class="right x icon"></i>
                                         </a>
                                     </div>

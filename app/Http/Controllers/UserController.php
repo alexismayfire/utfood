@@ -74,22 +74,4 @@ class UserController extends Controller
 
         return view('estabelecimento.list_user', ['estabelecimentos' => $estabelecimentos, 'avaliacoesCount' => $avaliacoes]);
     }
-
-    public function editarEstabelecimento(Estabelecimento $estabelecimento)
-    {
-        $pratosCardapio = [];
-        $cardapios = Cardapio::where([
-            ['estabelecimento', $estabelecimento->id]
-        ])->get();
-
-        foreach ($cardapios as $cardapio)
-        {
-            $pratosCardapio[$cardapio->id] = Prato::where([
-                ['cardapio', $cardapio->id]
-            ])->get();
-        }
-
-        return view('estabelecimento.editar',
-            ['usuario' => Auth::user(), 'estabelecimento' => $estabelecimento, 'cardapios' => $cardapios, 'pratosCardapio' => $pratosCardapio ]);
-    }
 }
