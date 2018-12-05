@@ -28,13 +28,20 @@ class EstabelecimentoController extends Controller
         return view('estabelecimento.list', ['estabelecimentos' => $estabelecimentos, 'avaliacoesCount' => $avaliacoes]);
     }
 
+    public function filtrar(Request $request)
+    {
+        if ($request->query->get('nome'))
+        {
+            $estabelecimentos = Estabelecimento::where('nome', 'ilike', '%' . $request->input('nome') . '%')->get();
+            return response()->json(['estabelecimentos' => $estabelecimentos]);
+        }
+    }
+
     public function exibir(Estabelecimento $estabelecimento)
     {
         $avaliacoes = Avaliacao::where([
             ['tipos_conteudo', 1], ['tipo_conteudo_id', $estabelecimento->id]
         ])->get();
-
-        //$cardapios = Cardapio::where('estabelecimento', $estabelecimento->id)->get();
 
         return view(
             'estabelecimento.profile',

@@ -16,5 +16,6 @@ mix.sass('resources/sass/app.scss', 'public/css')
     .scripts([
         'resources/js/menu.js',
         'resources/js/forms.js',
-        'resources/js/userReservas.js'
+        'resources/js/userReservas.js',
+        'resources/js/estabelecimentos.js'
     ], 'public/js/vanilla.js');

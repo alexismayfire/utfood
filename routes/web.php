@@ -140,6 +140,16 @@ Route::get(
 )->name('estabelecimentos');
 
 /*
+ * Para retornar uma busca de elementos por nome
+ * Exige: String (querystring)
+ * Retorna: array de Estabelecimento
+ */
+Route::get(
+    '/api/estabelecimentos/filtrar',
+    'EstabelecimentoController@filtrar'
+)->name('filtrar_estabelecimentos');
+
+/*
  * Para visitar a página de um estabelecimento específico.
  * Aqui, deveria decidir se outras informações serão retornadas (como avaliações).
  * Retorna: objeto de Estabelecimento

@@ -6,6 +6,17 @@
             <div class="ten wide column">
                 <div class="ui segment raised padded">
                     <h2 class="ui dividing header">Estabelecimentos</h2>
+                    <div class="ui centered grid">
+                        <div class="column eight wide">
+                            <div class="ui category search">
+                                    <div class="ui fluid icon input">
+                                        <input class="prompt" type="text" placeholder="Digite um termo para buscar...">
+                                        <i class="search icon"></i>
+                                    </div>
+                                <div class="results"></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="ui divided items">
                         @foreach($estabelecimentos as $estabelecimento)
                             <div class="item">
@@ -20,7 +31,7 @@
                                 <div class="content">
                                     <div class="header">{{ $estabelecimento->nome }}</div>
                                     <div class="meta">
-                                        <span class="cozinha">Japonesa</span>
+                                        <span class="cozinha">{{ $estabelecimento->tipoCozinha->titulo }}</span>
                                     </div>
                                     <div class="description text-left">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id eleifend elit. Suspendisse euismod ligula eget sodales dapibus. Vivamus iaculis sagittis ipsum vel sollicitudin.</p>

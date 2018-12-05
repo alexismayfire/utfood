@@ -20,11 +20,17 @@ class CreateEstabelecimentosTable extends Migration
             $table->integer('dono');
             $table->string('endereco');
             $table->string('telefone');
+            $table->integer('tipo_cozinha_id');
             $table->timestamps();
 
             $table->foreign('dono')
                 ->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('tipo_cozinha_id')
+                ->references('id')
+                ->on('tipo_cozinha')
                 ->onDelete('cascade');
         });
     }
