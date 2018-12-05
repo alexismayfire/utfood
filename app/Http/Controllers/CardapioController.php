@@ -62,6 +62,7 @@ class CardapioController extends Controller
             ['estabelecimento_id', $estabelecimento->id]
         ])->get();
 
+        $pratosCardapio = null;
         foreach ($cardapios as $cardapio)
         {
             $pratosCardapio[$cardapio->id] = Prato::where([

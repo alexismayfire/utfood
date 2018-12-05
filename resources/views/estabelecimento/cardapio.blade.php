@@ -7,12 +7,14 @@
                     <div class="item">
                         <div class="twelve wide column content text-left">
                             <div class="header">{{ $prato->titulo }}</div>
-                            <p>{{ $prato->descricao }}</p>
+                            <div class="meta">{{ $prato->tipoNome }}</div>
+                            <div class="content">{{ $prato->descricao }}</div>
                             <div class="ui tiny statistic floated right">
                                 <div class="value">R$ {{ $prato->preco }}</div>
                             </div>
                         </div>
                     </div>
+                    <div class="ui divider hidden"></div>
                 @endforeach
             </div>
         </div>

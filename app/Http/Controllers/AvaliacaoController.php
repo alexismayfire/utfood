@@ -18,12 +18,12 @@ class AvaliacaoController extends Controller
             ['usuario', $user->id], ['tipos_conteudo', 1], ['tipo_conteudo_id', $estabelecimento->id]
         ])->get()->first();
 
-        if (!$avaliacao->id)
+        if ($request->method() == 'POST')
         {
             $estrelas = (int)$request->input('estrelas');
             $comentario = $request->input('comentario');
 
-            if ($request->method() == 'POST' && $estrelas > 0)
+            if ($estrelas > 0)
             {
                 $avaliacao = new Avaliacao;
                 $avaliacao->usuario = $user->id;
@@ -37,7 +37,6 @@ class AvaliacaoController extends Controller
                 }
 
                 $avaliacao->save();
-            $avaliacao = $avaliacao->first();
 
                 return redirect()->route('minhas_reservas');
             }

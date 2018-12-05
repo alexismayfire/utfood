@@ -2,7 +2,7 @@
     <div class="ui large secondary menu">
         <div class="header item">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                {{ config('app.name', 'UTFood') }}
             </a>
         </div>
         @auth

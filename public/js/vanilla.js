@@ -124,7 +124,7 @@ $(function() {
                 nome: ['minLength[3]', 'empty'],
                 endereco: ['minLength[10]', 'empty'],
                 telefone: ['minLength[8]', 'maxLength[14]', 'empty'],
-                descricao: ['minLength[100]', 'maxLength[1024]', 'empty']
+                descricao: ['minLength[30]', 'maxLength[1024]', 'empty']
             }
         })
     ;

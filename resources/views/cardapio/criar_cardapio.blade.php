@@ -5,11 +5,11 @@
         <div class="ui centered vertically padded grid">
             <div class="seix wide column">
                 <div class="ui segment raised padded">
-                    <div class="ui segment">
+                    <div class="ui basic segment">
                         @if($cardapio->id == null)
-                        <h2 class="ui left floated header">Criar cardápio para {{$estabelecimento->nome}}</h2>
+                            <h2 class="ui left floated header">Criar cardápio para {{$estabelecimento->nome}}</h2>
                         @else
-                        <h2 class="ui left floated header">Editar Cardápio - {{$cardapio->nome}}</h2>
+                            <h2 class="ui left floated header">Editar Cardápio - {{$cardapio->nome}}</h2>
                         @endif
                         <div class="ui clearing divider"></div>
                         <form class="ui form" method="POST" action="{{ route('criar_cardapio_post', ['estabelecimento' => $estabelecimento, 'cardapio' => $cardapio]) }}">
@@ -30,38 +30,50 @@
                             </div>
                         </form>
                     </div>
-
+                    <div class="ui divider hidden"></div>
                     <div>
-                        @if (!$pratos->isEmpty())
-                            <div class="ui segment" style="margin-top: 30px;">
+                        @if(!$pratos->isEmpty())
+                            <div class="ui basic segment">
                                 <h2 class="ui horizontal divider header">
                                     <i class="bar utensil spoon icon"></i>
                                     Pratos
                                 </h2>
-                                @foreach($pratos as $prato)
-                                    <table class="ui definition table">
-                                        <tbody>
-                                        <tr>
-                                            <td class="two wide column">Título</td>
-                                            <td>
-                                                {{$prato->titulo}}
-                                                <a class="ui red button ui right floated"
-                                                   href="{{ route('remover_prato', ['estabelecimento' => $estabelecimento, 'cardapio' => $cardapio, 'prato' => $prato])}}">
-                                                    <i class="right x icon"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="two wide column">Preço</td>
-                                            <td>{{$prato->preco}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="two wide column">Descricao</td>
-                                            <td>{{$prato->descricao}}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                @endforeach
+                                <div class="ui list">
+                                    @foreach($pratos as $prato)
+                                        <div class="item">
+                                            <div class="ui grid two columns">
+                                                <div class="fourteen wide column">
+                                                    <table class="ui definition table">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="two wide column">Título</td>
+                                                            <td>{{$prato->titulo}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="two wide column">Preço</td>
+                                                            <td>{{$prato->preco}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="two wide column">Descricao</td>
+                                                            <td>{{$prato->descricao}}</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="two wide column">
+                                                    <div class="ui divider hidden"></div>
+                                                    <div class="ui divider hidden"></div>
+                                                    <form id="remover-prato" method="post" action="{{ route('remover_prato', compact('estabelecimento', 'cardapio', 'prato')) }}">
+                                                        @csrf
+                                                        <a class="ui red button fluid" onclick="event.preventDefault();document.getElementById('remover-prato').submit()">
+                                                            <i class="x icon center"></i>
+                                                        </a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         @else
                             <p>Você não possui nenhum prato registrado ainda</p>
@@ -80,11 +92,22 @@
                                     <label for="titulo">Título: </label>
                                     <input type="text" name="titulo" id="titulo" value=""/>
                                 </div>
-                                <div class="six wide column">
+                                <div class="four wide column">
                                     <label for="tipo">Tipo de Cozinha: </label>
                                     <select class="ui dropdown" id="tipo" name="tipoCozinha">
                                         @foreach($tiposCozinha as $tipo)
-                                            <option name="tipo" value="{{$tipo->id}}">{{$tipo->titulo}}</option>
+                                            <option value="{{$tipo->id}}">{{$tipo->titulo}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="four wide column">
+                                    <label for="tipo">Tipo do Prato: </label>
+                                    <select class="ui dropdown" id="tipo" name="tipoPrato">
+                                        <option value="1">Entrada</option>
+                                        <option value="2">Prato Principal</option>
+                                        <option value="3">Sobremesa</option>
+                                        @foreach($tiposCozinha as $tipo)
+                                            <option value="{{$tipo->id}}">{{$tipo->titulo}}</option>
                                         @endforeach
                                     </select>
                                 </div>

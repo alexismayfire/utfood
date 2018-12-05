@@ -12,6 +12,17 @@ class PratoSeeder extends Seeder
      */
     public function run()
     {
-        factory(Prato::class, 60)->create();
+        for($i = 1; $i <= 30; $i++)
+        {
+            for($j = 1; $j <= 3; $j++)
+            {
+                $tipoCozinha = rand(1, 3);
+                factory(Prato::class, 1)->create([
+                    'cardapio' => $i,
+                    'tipo' => $j,
+                    'tipo_cozinha' => $tipoCozinha
+                ]);
+            }
+        }
     }
 }

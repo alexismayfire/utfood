@@ -15,14 +15,15 @@
                                         <p>Pontos: {{$cardapio->pontos}}</p>
                                     </div>
                                     <div class="column">
-                                        <a class="ui primary button"
-                                           href="{{ route('editar_cardapio_view', ['estabelecimento' => $estabelecimento, 'cardapio' => $cardapio])}}">
-                                            Editar
-                                        </a>
-                                        <a class="ui red button"
-                                           href="{{ route('remover_cardapio', ['estabelecimento' => $estabelecimento, 'idCardapio' => $cardapio->id])}}">
-                                            <i class="right x icon"></i>
-                                        </a>
+                                        <form id="remover-cardapio" method="post" action="{{ route('remover_cardapio', compact('estabelecimento', 'cardapio')) }}">
+                                            @csrf
+                                            <a class="ui primary button" href="{{ route('editar_cardapio_view', compact('estabelecimento', 'cardapio')) }}">
+                                                Editar<i class="right chevron icon"></i>
+                                            </a>
+                                            <a class="ui red button" onclick="event.preventDefault(); document.getElementById('remover-cardapio').submit(); ">
+                                                Remover<i class="right x icon"></i>
+                                            </a>
+                                        </form>
                                     </div>
                                 </div>
                             @endforeach

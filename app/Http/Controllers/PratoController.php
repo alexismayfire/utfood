@@ -18,20 +18,23 @@ class PratoController extends Controller
         $prato->descricao = $request->input('descricao');
         $prato->tipo_cozinha = $request->input('tipoCozinha');
         $prato->preco = $request->input('preco');
+        $prato->tipo = $request->input('tipoPrato');
         $prato->cardapio = $cardapio->id;
         $prato->save();
 
-        $pratosCardapio = [];
+        $pratos = [];
         if($cardapio != null) {
-            $pratosCardapio = Prato::where([
+            $pratos = Prato::where([
                 ['cardapio', $cardapio->id]
             ])->get();
         }
 
-        $tipoCozinha = TipoCozinha::All();
+        $tiposCozinha = TipoCozinha::All();
 
-        return view('cardapio.criar_cardapio',
-            ['estabelecimento' => $estabelecimento, 'cardapio' => $cardapio, 'pratos' => $pratosCardapio, 'tiposCozinha' => $tipoCozinha]);
+        return view(
+            'cardapio.criar_cardapio',
+            compact('estabelecimento', 'cardapio', 'pratos', 'tiposCozinha')
+        );
     }
 
     public function removerPrato(Request $request, Estabelecimento $estabelecimento, Cardapio $cardapio, Prato $prato) {
