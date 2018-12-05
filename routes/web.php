@@ -102,12 +102,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get(
         '/api/conta/meus-estabelecimentos/editar/{estabelecimento}',
-        'UserController@editarEstabelecimento'
+        'EstabelecimentoController@editarEstabelecimento'
     )->name('editar_estabelecimento_view');
 
 
     Route::post(
-        '/api/conta/meus-estabelecimentos/editar',
+        '/api/conta/meus-estabelecimentos/editar/{estabelecimento}',
         'EstabelecimentoController@editar'
     )->name('editar_estabelecimento_post');
     /*
@@ -161,14 +161,24 @@ Route::get(
 )->name('cardapio');
 
 Route::get(
-    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/{cardapio}',
-    'CardapioController@viewCriar'
+    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/criar-cardapio',
+    'CardapioController@viewCriarEditar'
 )->name('criar_cardapio_view');
 
+Route::get(
+    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/{cardapio}',
+    'CardapioController@viewCriarEditar'
+)->name('editar_cardapio_view');
+
 Route::post(
-    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/cardapios/criar-cardapio',
-    'CardapioController@criar'
+    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/cardapios/{cardapio}',
+    'CardapioController@criarOuEditar'
 )->name('criar_cardapio_post');
+
+Route::delete(
+    '/api/conta/meus-estabelecimentos/{estabelecimento}/remover/{cardapio}',
+    'CardapioController@removerCardapio'
+)->name('remover_cardapio');
 
 /*
  * Para ver as avaliações de um cardápio.
@@ -235,9 +245,14 @@ Route::post(
  */
 
 Route::post(
-    '/api/conta/meus-estabelecimentos/editar/{estabelecimento}/{cardapio}/criar-prato',
-    'PratoController@criar'
+    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/{cardapio}/criar',
+    'PratoController@criarPrato'
 )->name('criar_prato');
+
+Route::delete(
+    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/{cardapio}/{prato}',
+    'PratoController@removerPrato'
+)->name('remover_prato');
 
 /*
  * Aqui são as rotas usando Collections (da pasta App/Http/Resources).
