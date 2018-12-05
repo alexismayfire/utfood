@@ -65,7 +65,7 @@ class EstabelecimentoController extends Controller
     {
         $pratosCardapio = [];
         $cardapios = Cardapio::where([
-            ['estabelecimento', $estabelecimento->id]
+            ['estabelecimento_id', $estabelecimento->id]
         ])->get();
 
         foreach ($cardapios as $cardapio)
