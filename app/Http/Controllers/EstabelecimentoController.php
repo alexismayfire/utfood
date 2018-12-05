@@ -10,6 +10,7 @@ use App\Avaliacao;
 use App\Cardapio;
 use App\Estabelecimento;
 use App\UserEstabelecimento;
+use App\Favorito;
 use App\Prato;
 
 class EstabelecimentoController extends Controller
@@ -69,7 +70,12 @@ class EstabelecimentoController extends Controller
     {
         $usuario = \Auth::user();
 
-        return view('estabelecimento.profile', compact('estabelecimento', 'usuario'));
+        $favoritos = Favorito::where([['user', $usuario->id], ['tipos_conteudo', 1]])
+            ->join('estabelecimentos', 'estabelecimentos.id', '=', 'favoritos.tipo_conteudo_id')
+            ->select('estabelecimentos.id')
+            ->get();
+
+        return view('estabelecimento.profile', compact('estabelecimento', 'usuario', 'favoritos'));
     }
 
     public function criar(Request $request)

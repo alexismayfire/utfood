@@ -9,7 +9,19 @@
                         <form action="{{ route('favoritar_estabelecimento', ['estabelecimento' => $estabelecimento]) }}" id="favoritar-estabelecimento" method="post">
                             @csrf
                             <a class="ui right corner big label" onclick="event.preventDefault();document.getElementById('favoritar-estabelecimento').submit()">
-                                <i class="heart icon"></i>
+                                @foreach($favoritos as $favorito)
+                                    @if($favorito->id === $estabelecimento->id)
+                                        @php
+                                            $fav = true;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if(isset($fav))
+                                    <i class="heart red icon"></i>
+                                @else
+                                    <i class="heart icon"></i>
+                                @endif
+
                             </a>
                         </form>
                         <img

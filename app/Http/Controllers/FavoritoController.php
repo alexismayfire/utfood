@@ -26,10 +26,12 @@ class FavoritoController extends Controller
         }
         else
         {
-            $existe->delete();
+            Favorito::where([
+                ['user', $user->id], ['tipos_conteudo', 1], ['tipo_conteudo_id', $estabelecimento->id]
+            ])->delete();
         }
 
-        return redirect()->route('estabelecimento', compact('estabelecimento', 'user'));
+        return redirect()->route('estabelecimento', compact('estabelecimento'));
     }
 
     public function estabelecimentosUsuario()
