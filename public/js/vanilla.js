@@ -176,6 +176,18 @@ $(function() {
         $('#estabelecimento-reserva').html($(this).data('estabelecimento'));
         $('#cancelarReservaUsuario').attr('action', $(this).data('submit'));
     });
+
+    $('#avaliacao-rating').rating();
+
+    $('#avaliacaoForm').on('submit', function(evt) {
+        const rating = ($('#avaliacao-rating').rating('get rating'));
+        if(rating > 0)
+        {
+            $('input[name="estrelas"]').val(rating);
+        }
+
+        return true;
+    });
 });
 
 $(function() {

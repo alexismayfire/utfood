@@ -100,6 +100,22 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('cancelar_minha_reserva');
 
     /*
+     * Para checar a avaliação de um estabelecimento após uma reserva concluída
+     */
+    Route::get(
+        '/api/conta/avaliar/{reserva}',
+        'AvaliacaoController@avaliarEstabelecimento'
+    )->name('avaliar_minha_reserva');
+
+    /*
+     * Para enviar a avaliação de um estabelecimento após uma reserva concluída
+     */
+    Route::post(
+        '/api/conta/avaliar/{reserva}',
+        'AvaliacaoController@avaliarEstabelecimento'
+    )->name('avaliar_minha_reserva');
+
+    /*
      * Para gerenciar os estabelecimentos do usuário. O menu principal precisa ser alterado
      * Retorna: lista de Estabelecimentos que o User logado possui
      */
