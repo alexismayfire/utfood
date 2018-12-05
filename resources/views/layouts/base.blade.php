@@ -36,10 +36,13 @@
     </head>
     <body>
         <div id="app">
-            @include('menu')
+            @include('layouts.sidebar')
             @yield('modal')
-            <div class="ui grid container">
-                @yield('content')
+            <div class="pusher">
+                @include('menu')
+                <div class="ui grid container">
+                    @yield('content')
+                </div>
             </div>
         </div>
     </body>

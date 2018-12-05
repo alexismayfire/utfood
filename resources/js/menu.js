@@ -8,4 +8,11 @@ $(function() {
             hide: 400
         }
     });
+
+    $('#filtrar-estabelecimentos').on('click', function() {
+        $('.ui.sidebar')
+            .sidebar('transition', 'auto')
+            .sidebar('toggle')
+        ;
+    });
 });

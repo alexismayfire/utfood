@@ -8,6 +8,13 @@ $(function() {
             hide: 400
         }
     });
+
+    $('#filtrar-estabelecimentos').on('click', function() {
+        $('.ui.sidebar')
+            .sidebar('transition', 'auto')
+            .sidebar('toggle')
+        ;
+    });
 });
 
 $.extend($.fn.pickadate.defaults, {
@@ -172,6 +179,10 @@ $(function() {
 });
 
 $(function() {
+    for($i = 1; $i <= 5; $i++) {
+        $('#filtro-rating-' + $i).rating('disable').rating();
+    }
+
     $('.ui.search')
         .search({
             type: 'category',

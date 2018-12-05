@@ -1,4 +1,8 @@
 $(function() {
+    for($i = 1; $i <= 5; $i++) {
+        $('#filtro-rating-' + $i).rating('disable').rating();
+    }
+
     $('.ui.search')
         .search({
             type: 'category',

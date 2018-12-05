@@ -13,4 +13,9 @@ class Avaliacao extends Model
     {
         return User::find($this->usuario);
     }
+
+    public function avaliado()
+    {
+        return $this->morphTo();
+    }
 }

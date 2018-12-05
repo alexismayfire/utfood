@@ -24,6 +24,17 @@ class Estabelecimento extends Model
         return $this->hasMany('App\Cardapio');
     }
 
+    public function avaliacoes()
+    {
+        //return $this->morphMany('App\Avaliacao', 'avaliado');
+        return $this->hasMany('App\Avaliacao', 'tipo_conteudo_id')->where('tipos_conteudo', 1);
+    }
+
+    public function favoritos()
+    {
+        return $this->hasMany('App\Favorito', 'tipo_conteudo_id')->where('tipos_conteudo', 1);
+    }
+
     public function getUrlAttribute()
     {
         return $this->attributes['url'] = route('estabelecimento', ['estabelecimento' => $this->id]);

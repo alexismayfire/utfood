@@ -19,6 +19,8 @@ class CreateAvaliacao extends Migration
             $table->integer('estrelas');
             $table->integer('tipos_conteudo');
             $table->integer('tipo_conteudo_id');
+//            $table->integer('avaliado_id');
+//            $table->string('avaliado_type');
             $table->string('comentario');
             $table->timestamps();
 
@@ -31,6 +33,7 @@ class CreateAvaliacao extends Migration
                 ->references('id')
                 ->on('tipos_conteudo')
                 ->onDelete('cascade');
+
         });
     }
 

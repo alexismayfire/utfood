@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\TipoCozinha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use App\Avaliacao;
 use App\Cardapio;
@@ -17,36 +19,57 @@ class EstabelecimentoController extends Controller
     public function exibirTodos()
     {
         $estabelecimentos = Estabelecimento::all();
-        $avaliacoes[] = [];
-        foreach ($estabelecimentos as $estabelecimento)
-        {
-            $avaliacoes[$estabelecimento->id] = Avaliacao::where([
-                ['tipos_conteudo', 1], ['tipo_conteudo_id', $estabelecimento->id]
-            ])->count();
-        }
+        $tiposCozinha = TipoCozinha::all();
 
-        return view('estabelecimento.list', ['estabelecimentos' => $estabelecimentos, 'avaliacoesCount' => $avaliacoes]);
+        return view('estabelecimento.list', compact('estabelecimentos', 'tiposCozinha'));
     }
 
     public function filtrar(Request $request)
     {
-        if ($request->query->get('nome'))
+        $estabelecimentos = Estabelecimento::query();
+        $tipoCozinha = $request->query->get('tipo-cozinha');
+        $avaliacoes = $request->query->get('avaliacoes');
+        $nome = $request->query->get('nome');
+
+        if ($nome)
         {
-            $estabelecimentos = Estabelecimento::where('nome', 'ilike', '%' . $request->input('nome') . '%')->get();
+            $estabelecimentos = $estabelecimentos->where('nome', 'ilike', '%' . $nome . '%')->get();
+
             return response()->json(['estabelecimentos' => $estabelecimentos]);
         }
+
+        if ($tipoCozinha)
+        {
+            $estabelecimentos = $estabelecimentos->where('estabelecimentos.tipo_cozinha_id', (int)$tipoCozinha);
+        }
+
+        if ($avaliacoes)
+        {
+            $estabelecimentos = $estabelecimentos->with('avaliacoes')->get();
+            $temp = new Collection;
+            foreach($estabelecimentos as $estabelecimento) {
+                if ($estabelecimento->avaliacoes->avg('estrelas') >= $avaliacoes) {
+                    $temp[] = $estabelecimento;
+                }
+            }
+
+            $estabelecimentos = $temp;
+        }
+        else
+        {
+            $estabelecimentos = $estabelecimentos->get();
+        }
+
+        $tiposCozinha = TipoCozinha::all();
+
+        return view('estabelecimento.list', compact('estabelecimentos', 'tiposCozinha'));
     }
 
     public function exibir(Estabelecimento $estabelecimento)
     {
-        $avaliacoes = Avaliacao::where([
-            ['tipos_conteudo', 1], ['tipo_conteudo_id', $estabelecimento->id]
-        ])->get();
+        $usuario = \Auth::user();
 
-        return view(
-            'estabelecimento.profile',
-            ['estabelecimento' => $estabelecimento, 'avaliacoes' => $avaliacoes]
-        );
+        return view('estabelecimento.profile', compact('estabelecimento', 'usuario'));
     }
 
     public function criar(Request $request)

@@ -6,17 +6,47 @@
             <div class="ten wide column">
                 <div class="ui segment raised padded">
                     <h2 class="ui dividing header">Estabelecimentos</h2>
-                    <div class="ui centered grid">
-                        <div class="column eight wide">
-                            <div class="ui category search">
-                                    <div class="ui fluid icon input">
-                                        <input class="prompt" type="text" placeholder="Digite um termo para buscar...">
+                    @php
+                        /*
+                        if (route('filtrar_estabelecimentos') == url()->current()) {
+                            $params = explode('?', url()->full());
+                            $temp = $params[1];
+                            $params = explode('&', $temp);
+                            if (count($params) == 2) {
+                                var_dump($params);
+                            }
+                        }
+                        */
+                    @endphp
+                    <div class="ui basic placeholder segment">
+                        <div class="ui two column stackable center aligned grid">
+                            <div class="middle aligned row">
+                                <div class="column">
+                                    <div class="ui icon header">
                                         <i class="search icon"></i>
+                                        Buscar por nome
                                     </div>
-                                <div class="results"></div>
+                                    <div class="ui category search">
+                                        <div class="ui icon input">
+                                            <input class="prompt" type="text" placeholder="Digite um termo...">
+                                            <i class="search icon"></i>
+                                        </div>
+                                        <div class="results"></div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="ui icon header">
+                                        <i class="world icon"></i>
+                                        Buscar por categorias e avaliações
+                                    </div>
+                                    <button class="ui button center aligned" id="filtrar-estabelecimentos">
+                                        Filtrar
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="ui divider"></div>
                     <div class="ui divided items">
                         @foreach($estabelecimentos as $estabelecimento)
                             <div class="item">
@@ -44,7 +74,11 @@
                                         </a>
                                         <span class="ui left floated">
                                             <i class="green check icon"></i>
-                                            {{$avaliacoesCount[$estabelecimento->id]}}
+                                            {{ $estabelecimento->avaliacoes->count() }} avaliações
+                                        </span>
+                                        <span class="ui left floated">
+                                            <i class="yellow star icon"></i>
+                                            {{ number_format($estabelecimento->avaliacoes->avg('estrelas'), 2) }} avaliação média
                                         </span>
                                     </div>
                                 </div>

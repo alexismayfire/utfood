@@ -1,5 +1,5 @@
 @if (Route::has('login'))
-    <div class="ui stackable menu">
+    <div class="ui large secondary menu">
         <div class="header item">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}

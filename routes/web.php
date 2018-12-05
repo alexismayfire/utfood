@@ -69,8 +69,16 @@ Route::group(['middleware' => ['auth']], function () {
      */
     Route::get(
         '/api/conta/favoritos',
-        'UserController@favoritos'
+        'FavoritoController@estabelecimentosUsuario'
     )->name('favoritos');
+
+    /*
+     * Para favoritar um Estabelecimento
+     */
+    Route::post(
+        '/api/conta/favoritar/estabelecimento/{estabelecimento}',
+        'FavoritoController@estabelecimento'
+    )->name('favoritar_estabelecimento');
 
     /*
      * Para ver a página de reservas

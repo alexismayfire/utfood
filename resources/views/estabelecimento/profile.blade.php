@@ -6,6 +6,12 @@
             <div class="ten wide column">
                 <div class="ui segment raised padded fluid card">
                     <div class="image">
+                        <form action="{{ route('favoritar_estabelecimento', ['estabelecimento' => $estabelecimento]) }}" id="favoritar-estabelecimento" method="post">
+                            @csrf
+                            <a class="ui right corner big label" onclick="event.preventDefault();document.getElementById('favoritar-estabelecimento').submit()">
+                                <i class="heart icon"></i>
+                            </a>
+                        </form>
                         <img
                             src="https://via.placeholder.com/700x300"
                             alt="{{ $estabelecimento->nome}}"
@@ -34,7 +40,7 @@
                     </div>
                     <h2 class="ui horizontal divider header"><i class="star mini icon"></i>Avaliações</h2>
                     <div>
-                        @foreach($avaliacoes as $avaliacao)
+                        @foreach($estabelecimento->avaliacoes as $avaliacao)
                             <div class="item">
                                 <div class="content">
                                     @include('estabelecimento.avaliacoes')
