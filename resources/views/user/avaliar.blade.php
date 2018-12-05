@@ -14,7 +14,7 @@
                             @csrf
                             <p><strong>{{ $user->name }}</strong>, você está avaliando sua reserva de {{ $reserva->data->format('d/m/Y \à\s H\h') }}, no estabelecimento {{ $estabelecimento->nome }}.</p>
                             <p>Queremos saber o que você achou do cardápio {{ $cardapio->nome }}:</p>
-                            <div class="field">
+                            <div class="required field">
                                 <label>Avaliação:</label>
                                 <div class="ui rating huge" id="avaliacao-rating" data-rating="0" data-max-rating="5"></div>
                                 <input type="hidden" name="estrelas" value="">

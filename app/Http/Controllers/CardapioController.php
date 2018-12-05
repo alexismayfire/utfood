@@ -23,11 +23,11 @@ class CardapioController extends Controller
 
         $cardapio->nome = $request->input('nome');
         $cardapio->pontos = $request->input('pontos');
-        $cardapio->estabelecimento = $estabelecimento->id;
+        $cardapio->estabelecimento_id = $estabelecimento->id;
         $cardapio->save();
 
         $cardapios = Cardapio::where([
-            ['estabelecimento', $estabelecimento->id]
+            ['estabelecimento_id', $estabelecimento->id]
         ])->get();
 
         foreach ($cardapios as $cardapio)
@@ -37,8 +37,7 @@ class CardapioController extends Controller
             ])->get();
         }
 
-        return view('estabelecimento.editar',
-            ['usuario' => Auth::user(), 'estabelecimento' => $estabelecimento, 'cardapios' => $cardapios, 'pratosCardapio' => $pratosCardapio ]);
+        return redirect()->route('editar_estabelecimento_view', compact('estabelecimento'));
     }
 
     public function viewCriarEditar(Estabelecimento $estabelecimento, Cardapio $cardapio) {
@@ -57,11 +56,10 @@ class CardapioController extends Controller
     }
 
     public function removerCardapio(Estabelecimento $estabelecimento, Cardapio $cardapio) {
-        $cardapio = Cardapio::find($idCardapio);
         $cardapio->delete();
 
         $cardapios = Cardapio::where([
-            ['estabelecimento', $estabelecimento->id]
+            ['estabelecimento_id', $estabelecimento->id]
         ])->get();
 
         foreach ($cardapios as $cardapio)

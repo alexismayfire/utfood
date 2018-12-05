@@ -116,6 +116,18 @@ $(function() {
             console.log(data);
         });
     }
+
+    $('.ui.form')
+        .form({
+            fields: {
+                name: ['minLength[3]', 'empty'],
+                nome: ['minLength[3]', 'empty'],
+                endereco: ['minLength[10]', 'empty'],
+                telefone: ['minLength[8]', 'maxLength[14]', 'empty'],
+                descricao: ['minLength[100]', 'maxLength[1024]', 'empty']
+            }
+        })
+    ;
     /*
     $('#data-reserva').focusout(function (evt) {
         const valorDigitado = $(this).val().split('/');
@@ -181,10 +193,7 @@ $(function() {
 
     $('#avaliacaoForm').on('submit', function(evt) {
         const rating = ($('#avaliacao-rating').rating('get rating'));
-        if(rating > 0)
-        {
-            $('input[name="estrelas"]').val(rating);
-        }
+        $('input[name="estrelas"]').val(rating);
 
         return true;
     });

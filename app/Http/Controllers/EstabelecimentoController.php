@@ -86,7 +86,9 @@ class EstabelecimentoController extends Controller
         $estabelecimento->nome = $request->input('nome');
         $estabelecimento->endereco = $request->input('endereco');
         $estabelecimento->telefone = $request->input('telefone');
-        $estabelecimento->dono = Auth::user()->id;
+        $estabelecimento->tipo_cozinha_id = $request->input('tipo_cozinha');
+        $estabelecimento->descricao = $request->input('descricao');
+        $estabelecimento->dono = $user->id;
         $estabelecimento->save();
 
         $userEstabelecimento = new UserEstabelecimento;
@@ -94,7 +96,7 @@ class EstabelecimentoController extends Controller
         $userEstabelecimento->estabelecimento = $estabelecimento->id;
         $userEstabelecimento->save();
 
-        return $this->exibir($estabelecimento);
+        return redirect()->route('estabelecimento', compact('estabelecimento'));
     }
 
     public function editarEstabelecimento(Estabelecimento $estabelecimento)
@@ -123,10 +125,12 @@ class EstabelecimentoController extends Controller
         if($request->input('nome')) $estabelecimento->nome = $request->input('nome');
         if($request->input('endereco')) $estabelecimento->endereco = $request->input('endereco');
         if($request->input('telefone')) $estabelecimento->telefone = $request->input('telefone');
+        if($request->input('tipo_cozinha')) $estabelecimento->tipo_cozinha_id = $request->input('tipo_cozinha');
+        if($request->input('descricao')) $estabelecimento->descricao = $request->input('descricao');
 
         $estabelecimento->save();
 
-        return $this->editarEstabelecimento($estabelecimento);
+        return redirect()->route('editar_estabelecimento_view', compact('estabelecimento'));
     }
 
     /*

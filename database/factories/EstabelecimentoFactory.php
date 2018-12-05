@@ -6,6 +6,7 @@ $factory->define(App\Estabelecimento::class, function (Faker $faker) use ($facto
     return [
         'nome' => substr($faker->sentence(2), 0, -1),
         'dono' => factory(\App\User::class)->create()->id,
+        'descricao' => substr($faker->sentence(50), 0, -1),
         'endereco' => $faker->address,
         'telefone' => $faker->phoneNumber,
         'tipo_cozinha_id' => $faker->numberBetween(1, 5)

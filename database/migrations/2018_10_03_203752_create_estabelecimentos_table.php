@@ -18,6 +18,7 @@ class CreateEstabelecimentosTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->integer('dono');
+            $table->text('descricao');
             $table->string('endereco');
             $table->string('telefone');
             $table->integer('tipo_cozinha_id');

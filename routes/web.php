@@ -215,7 +215,7 @@ Route::get(
 )->name('editar_cardapio_view');
 
 Route::post(
-    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/cardapios/{cardapio}',
+    '/api/conta/meus-estabelecimentos/{estabelecimento}/editar/cardapios/{cardapio?}',
     'CardapioController@criarOuEditar'
 )->name('criar_cardapio_post');
 

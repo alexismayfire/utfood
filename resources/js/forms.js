@@ -97,6 +97,18 @@ $(function() {
             console.log(data);
         });
     }
+
+    $('.ui.form')
+        .form({
+            fields: {
+                name: ['minLength[3]', 'empty'],
+                nome: ['minLength[3]', 'empty'],
+                endereco: ['minLength[10]', 'empty'],
+                telefone: ['minLength[8]', 'maxLength[14]', 'empty'],
+                descricao: ['minLength[100]', 'maxLength[1024]', 'empty']
+            }
+        })
+    ;
     /*
     $('#data-reserva').focusout(function (evt) {
         const valorDigitado = $(this).val().split('/');

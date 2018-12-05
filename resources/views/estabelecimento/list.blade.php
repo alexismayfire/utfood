@@ -64,8 +64,7 @@
                                         <span class="cozinha">{{ $estabelecimento->tipoCozinha->titulo }}</span>
                                     </div>
                                     <div class="description text-left">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id eleifend elit. Suspendisse euismod ligula eget sodales dapibus. Vivamus iaculis sagittis ipsum vel sollicitudin.</p>
-                                        <p>Quisque non ligula in ex imperdiet pulvinar vitae quis nisl. Sed nec purus enim. Integer luctus accumsan felis eget commodo. Vestibulum tristique iaculis nulla sed malesuada.</p>
+                                        <p>{{ $estabelecimento->descricao }}</p>
                                     </div>
                                     <div class="extra">
                                         <a class="ui right floated primary button" href="{{ route('estabelecimento', ['estabelecimento' => $estabelecimento]) }}">
